@@ -7,7 +7,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Task Management"),
+        title: const Text("Task Management", style: TextStyle(fontFamily: 'poppins', fontWeight: FontWeight.bold),),
       ),
       body: Column(
         children: [
