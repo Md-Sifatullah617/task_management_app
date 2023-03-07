@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../style/style.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -11,8 +13,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('Splash Screen'),
+      
+      body: Column(
+        children: [
+          screenBackground(context),
+
+        ],
       ),
     );
   }

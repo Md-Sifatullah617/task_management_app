@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 //customised color style
 const colorRed = Color.fromRGBO(231, 28, 36, 1);
@@ -11,8 +12,7 @@ const colorDarkBlue = Color.fromRGBO(44, 62, 80, 1);
 const colorLightGray = Color.fromRGBO(135, 142, 150, 1);
 const colorLight = Color.fromRGBO(211, 211, 211, 1);
 
-
-TextStyle head1Text(textcolor){
+TextStyle head1Text(textcolor) {
   return TextStyle(
     color: textcolor,
     fontSize: 28,
@@ -20,7 +20,8 @@ TextStyle head1Text(textcolor){
     fontWeight: FontWeight.w700,
   );
 }
-TextStyle head6Text(textcolor){
+
+TextStyle head6Text(textcolor) {
   return TextStyle(
     color: textcolor,
     fontSize: 16,
@@ -29,18 +30,42 @@ TextStyle head6Text(textcolor){
   );
 }
 
-InputDecoration appInputDecoration(label){
+InputDecoration appInputDecoration(label) {
   return InputDecoration(
-    focusedBorder: const OutlineInputBorder(
-      borderSide: BorderSide(color: colorGreen, width: 1),
+      focusedBorder: const OutlineInputBorder(
+        borderSide: BorderSide(color: colorGreen, width: 1),
+      ),
+      fillColor: colorWhite,
+      filled: true,
+      contentPadding: const EdgeInsets.fromLTRB(20, 10, 10, 20),
+      enabledBorder: const OutlineInputBorder(
+        borderSide: BorderSide(color: colorWhite, width: 0),
+      ),
+      border: const OutlineInputBorder(),
+      labelText: label);
+}
+
+DecoratedBox appDropDownStyle(child) {
+  return DecoratedBox(
+    decoration: BoxDecoration(
+      color: colorWhite,
+      border: Border.all(color: colorWhite, width: 1),
+      borderRadius: BorderRadius.circular(4),
     ),
-    fillColor: colorWhite,
-    filled: true,
-    contentPadding: const EdgeInsets.fromLTRB(20, 10, 10, 20),
-    enabledBorder: const OutlineInputBorder(
-      borderSide: BorderSide(color: colorWhite, width: 0),
+    child: Padding(
+      padding: const EdgeInsets.only(left: 30, right: 30),
+      child: child,
     ),
-    border: const OutlineInputBorder(),
-    labelText: label
+  );
+}
+
+
+SvgPicture screenBackground(context){
+  return SvgPicture.asset(
+    "assets/images/hi.svg",
+    alignment: Alignment.center,
+    width: MediaQuery.of(context).size.width,
+    height: MediaQuery.of(context).size.height,
+    fit: BoxFit.cover,
   );
 }
