@@ -14,10 +14,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       
-      body: Column(
+      body: Stack(
         children: [
           screenBackground(context),
-
+          const Center(child: Text("Splash Screen")),
         ],
       ),
     );
