@@ -17,7 +17,10 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Stack(
         children: [
           screenBackground(context),
-          const Center(child: Text("Splash Screen")),
+          const Padding(
+            padding: EdgeInsets.all(30),
+            child: Center(child: Image(image: AssetImage("assets/images/esuIT.png"))),
+          )
         ],
       ),
     );
