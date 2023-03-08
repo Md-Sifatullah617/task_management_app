@@ -22,6 +22,20 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("Get Started With", style: head1Text(colorDarkBlue),),
+                const SizedBox(height: 1,),
+                Text("Learn with esuIT", style: head6Text(colorLightGray),),
+                const SizedBox(height: 20,),
+                TextFormField(
+                  decoration: appInputDecoration("Email Address"),
+                ),
+                const SizedBox(height: 20,),
+                TextFormField(
+                  decoration: appInputDecoration("Password"),
+                ),
+                const SizedBox(height: 20,),
+                ElevatedButton(onPressed: (){},
+                    style: appButtonStyle(),
+                    child: successButtonChild("Login")),
               ],
             ),
           )

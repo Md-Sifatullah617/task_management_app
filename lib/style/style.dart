@@ -33,17 +33,18 @@ TextStyle head6Text(textcolor) {
 
 InputDecoration appInputDecoration(label) {
   return InputDecoration(
-      focusedBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: colorGreen, width: 1),
-      ),
-      fillColor: colorWhite,
-      filled: true,
-      contentPadding: const EdgeInsets.fromLTRB(20, 10, 10, 20),
-      enabledBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: colorWhite, width: 0),
-      ),
-      border: const OutlineInputBorder(),
-      labelText: label);
+    focusedBorder: const OutlineInputBorder(
+      borderSide: BorderSide(color: colorGreen, width: 1),
+    ),
+    fillColor: colorWhite,
+    filled: true,
+    contentPadding: const EdgeInsets.fromLTRB(20, 10, 10, 20),
+    enabledBorder: const OutlineInputBorder(
+      borderSide: BorderSide(color: colorWhite, width: 0),
+    ),
+    border: const OutlineInputBorder(),
+    labelText: label,
+  );
 }
 
 DecoratedBox appDropDownStyle(child) {
@@ -108,6 +109,7 @@ void successToast(msg) {
       textColor: colorWhite,
       fontSize: 16);
 }
+
 void errorToast(msg) {
   Fluttertoast.showToast(
       msg: msg,
