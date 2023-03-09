@@ -15,7 +15,7 @@ Future<bool> loginRequest(formValues) async {
   var resultBody = json.decode(response.body);
   if (resultCode == 200 && resultBody['status'] == 'success') {
     successToast("Request Success");
-    storeUserData(resultBody);
+    writeUserData(resultBody);
     return true;
   } else {
     errorToast("Request fail! try again");
