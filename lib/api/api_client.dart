@@ -52,8 +52,8 @@ Future<bool> verifyEmailRequest(email) async {
   }
 }
 
-Future<bool> verifyOTPRequest(email, OTP) async {
-  var uRL = Uri.parse("$baseURL/RecoverVerifyEmail/$email/$OTP");
+Future<bool> verifyOTPRequest(email, oTP) async {
+  var uRL = Uri.parse("$baseURL/RecoverVerifyEmail/$email/$oTP");
 
   var response = await http.get(uRL, headers: requestHeader);
   var resultCode = response.statusCode;
