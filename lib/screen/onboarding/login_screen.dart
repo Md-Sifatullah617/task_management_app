@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_management_app/api/api_client.dart';
 import 'package:task_management_app/style/style.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -18,56 +19,86 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
+  formOnSubmit() async {
+    if (formValues["email"]!.isEmpty) {
+      errorToast("Email Required !");
+    } else if (formValues["password"]!.isEmpty) {
+      errorToast("Password Required !");
+    } else {
+      setState(() {
+        loading = true;
+      });
+      bool res = await loginRequest(formValues);
+      if (res == true) {
+        //navigate to dashboard
+        
+      } else {
+        setState(() {
+          loading = false;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
           screenBackground(context),
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Get Started With",
-                  style: head1Text(colorDarkBlue),
-                ),
-                const SizedBox(
-                  height: 1,
-                ),
-                Text(
-                  "Learn with esuIT",
-                  style: head6Text(colorLightGray),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  decoration: appInputDecoration("Email Address"),
-                  onChanged: (textValue) {
-                    inputOnChanged("email", textValue);
-                  },
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  decoration: appInputDecoration("Password"),
-                  onChanged: (textValue) {
-                    inputOnChanged("password", textValue);
-                  },
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                    onPressed: () {},
-                    style: appButtonStyle(),
-                    child: successButtonChild("Login")),
-              ],
-            ),
+          Container(
+            alignment: Alignment.center,
+            child: loading
+                ? (const Center(child: (CircularProgressIndicator())))
+                : (SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Get Started With",
+                            style: head1Text(colorDarkBlue),
+                          ),
+                          const SizedBox(
+                            height: 1,
+                          ),
+                          Text(
+                            "Learn with esuIT",
+                            style: head6Text(colorLightGray),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            decoration: appInputDecoration("Email Address"),
+                            onChanged: (textValue) {
+                              inputOnChanged("email", textValue);
+                            },
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            decoration: appInputDecoration("Password"),
+                            onChanged: (textValue) {
+                              inputOnChanged("password", textValue);
+                            },
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton(
+                              onPressed: () {
+                                formOnSubmit();
+                              },
+                              style: appButtonStyle(),
+                              child: successButtonChild("Login")),
+                        ],
+                      ),
+                    ),
+                  )),
           )
         ],
       ),
