@@ -122,19 +122,17 @@ void errorToast(msg) {
       fontSize: 16);
 }
 
-
-PinTheme appOTPStyle(){
+PinTheme appOTPStyle() {
   return PinTheme(
-    inactiveColor: colorLight,
-    inactiveFillColor: colorWhite,
-    selectedColor: colorGreen,
-    activeColor: colorWhite,
-    selectedFillColor: colorGreen,
-    shape: PinCodeFieldShape.box,
-    borderRadius: BorderRadius.circular(5),
-    fieldHeight: 50,
-    borderWidth: 0.5,
-    fieldWidth: 60,
-    activeFillColor: colorWhite
-  );
+      inactiveColor: colorLight,
+      inactiveFillColor: colorWhite,
+      selectedColor: colorGreen,
+      activeColor: colorWhite,
+      selectedFillColor: colorGreen,
+      shape: PinCodeFieldShape.box,
+      borderRadius: BorderRadius.circular(5),
+      fieldHeight: 50,
+      borderWidth: 0.5,
+      fieldWidth: 45,
+      activeFillColor: colorWhite);
 }

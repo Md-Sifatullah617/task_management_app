@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../style/style.dart';
 
@@ -22,21 +23,36 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Pin Verification", style: head1Text(colorDarkBlue),),
-                const SizedBox(height: 1,),
-                Text("A 6 digit verification code ", style: head6Text(colorLightGray),),
-                const SizedBox(height: 20,),
-                TextFormField(
-                  decoration: appInputDecoration("Email Address"),
+                Text(
+                  "Pin Verification",
+                  style: head1Text(colorDarkBlue),
                 ),
-                const SizedBox(height: 20,),
-                TextFormField(
-                  decoration: appInputDecoration("Password"),
+                const SizedBox(
+                  height: 1,
                 ),
-                const SizedBox(height: 20,),
-                ElevatedButton(onPressed: (){},
+                Text(
+                  "A 6 digit verification pin has been sent to your mobile number",
+                  style: head6Text(colorLightGray),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                PinCodeTextField(
+                    appContext: context,
+                    length: 6,
+                    pinTheme: appOTPStyle(),
+                    animationType: AnimationType.fade,
+                    animationDuration: const Duration(milliseconds: 300),
+                    enableActiveFill: true,
+                    onCompleted: (v) {},
+                    onChanged: (value) {}),
+                const SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                    onPressed: () {},
                     style: appButtonStyle(),
-                    child: successButtonChild("Next")),
+                    child: successButtonChild("Verify")),
               ],
             ),
           )
