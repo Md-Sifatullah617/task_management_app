@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/pinVerification',
+      initialRoute: '/login',
       routes: {
         '/':(context)=> const SplashScreen(),
         '/login':(context)=> const LoginScreen(),

@@ -9,6 +9,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  Map<String, String> formValues = {"email": "", "password": ""};
+  bool loading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,19 +23,34 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Get Started With", style: head1Text(colorDarkBlue),),
-                const SizedBox(height: 1,),
-                Text("Learn with esuIT", style: head6Text(colorLightGray),),
-                const SizedBox(height: 20,),
+                Text(
+                  "Get Started With",
+                  style: head1Text(colorDarkBlue),
+                ),
+                const SizedBox(
+                  height: 1,
+                ),
+                Text(
+                  "Learn with esuIT",
+                  style: head6Text(colorLightGray),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 TextFormField(
                   decoration: appInputDecoration("Email Address"),
                 ),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
                 TextFormField(
                   decoration: appInputDecoration("Password"),
                 ),
-                const SizedBox(height: 20,),
-                ElevatedButton(onPressed: (){},
+                const SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                    onPressed: () {},
                     style: appButtonStyle(),
                     child: successButtonChild("Login")),
               ],
