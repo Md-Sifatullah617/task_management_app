@@ -11,6 +11,13 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   Map<String, String> formValues = {"email": "", "password": ""};
   bool loading = false;
+
+  inputOnChanged(mapKey, textValue) {
+    setState(() {
+      formValues.update(mapKey, (value) => textValue);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,12 +46,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextFormField(
                   decoration: appInputDecoration("Email Address"),
+                  onChanged: (textValue) {
+                    inputOnChanged("email", textValue);
+                  },
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
                   decoration: appInputDecoration("Password"),
+                  onChanged: (textValue) {
+                    inputOnChanged("password", textValue);
+                  },
                 ),
                 const SizedBox(
                   height: 20,
