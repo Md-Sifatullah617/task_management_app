@@ -31,7 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
       bool res = await loginRequest(formValues);
       if (res == true) {
         //navigate to dashboard
-        
+        Navigator.pushNamedAndRemoveUntil(
+            context, "/newTaskList", (route) => false);
       } else {
         setState(() {
           loading = false;

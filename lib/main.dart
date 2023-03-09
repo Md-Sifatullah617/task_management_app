@@ -5,6 +5,7 @@ import 'package:task_management_app/screen/onboarding/pin_verification_screen.da
 import 'package:task_management_app/screen/onboarding/registration_screen.dart';
 import 'package:task_management_app/screen/onboarding/set_password_screen.dart';
 import 'package:task_management_app/screen/onboarding/splash_screen.dart';
+import 'package:task_management_app/screen/task/new_task_list_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/emailVerification':(context)=> const EmailVerificationScreen(),
         '/pinVerification':(context)=> const PinVerificationScreen(),
         '/setPwd':(context)=> const SetPwdScreen(),
+        '/newTaskList':(context) => const NewTaskScreen(),
       },
     );
   }
