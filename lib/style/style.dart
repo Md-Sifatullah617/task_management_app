@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 //customised color style
 const colorRed = Color.fromRGBO(231, 28, 36, 1);
@@ -119,4 +120,21 @@ void errorToast(msg) {
       backgroundColor: colorRed,
       textColor: colorWhite,
       fontSize: 16);
+}
+
+
+PinTheme appOTPStyle(){
+  return PinTheme(
+    inactiveColor: colorLight,
+    inactiveFillColor: colorWhite,
+    selectedColor: colorGreen,
+    activeColor: colorWhite,
+    selectedFillColor: colorGreen,
+    shape: PinCodeFieldShape.box,
+    borderRadius: BorderRadius.circular(5),
+    fieldHeight: 50,
+    borderWidth: 0.5,
+    fieldWidth: 60,
+    activeFillColor: colorWhite
+  );
 }
