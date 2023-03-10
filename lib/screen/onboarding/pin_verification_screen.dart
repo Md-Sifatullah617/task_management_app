@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:task_management_app/api/api_client.dart';
+import 'package:task_management_app/utility/utilities.dart';
 
 import '../../style/style.dart';
 
@@ -12,8 +13,8 @@ class PinVerificationScreen extends StatefulWidget {
 }
 
 class _PinVerificationScreenState extends State<PinVerificationScreen> {
-  Map<String, String> formValues = {"otp": ""};
-    bool loading = false;
+  Map<String, String> formValues = {"OTP": ""};
+  bool loading = false;
 
   inputOnChanged(mapKey, textValue) {
     setState(() {
@@ -22,22 +23,25 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
   }
 
   formOnSubmit() async {
-    if (formValues["otp"]!.isEmpty && formValues["otp"]!.length!=6) {
+    if (formValues['OTP']!.length != 6) {
       errorToast("OTP Required (6 digit) !");
     } else {
       setState(() {
         loading = true;
       });
-      bool res = await verifyOTPRequest(formValues['email'],formValues['otp']);
+      String? emailAddress = await readUserData("EmailVerification");
+      bool res = await verifyOTPRequest(emailAddress, formValues['OTP']);
       if (res == true) {
-        Navigator.pushNamed(context, '/pinVerification');
+        Navigator.pushNamed(context, '/setPwd');
       } else {
         setState(() {
           loading = false;
         });
+        errorToast("Please input currect pin");
       }
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,12 +76,16 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
                     animationDuration: const Duration(milliseconds: 300),
                     enableActiveFill: true,
                     onCompleted: (v) {},
-                    onChanged: (value) {}),
+                    onChanged: (textValue) {
+                      inputOnChanged("OTP", textValue);
+                    }),
                 const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      formOnSubmit();
+                    },
                     style: appButtonStyle(),
                     child: successButtonChild("Verify")),
               ],
