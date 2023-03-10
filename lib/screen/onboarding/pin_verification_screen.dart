@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:task_management_app/api/api_client.dart';
 
 import '../../style/style.dart';
 
@@ -11,6 +12,32 @@ class PinVerificationScreen extends StatefulWidget {
 }
 
 class _PinVerificationScreenState extends State<PinVerificationScreen> {
+  Map<String, String> formValues = {"otp": ""};
+    bool loading = false;
+
+  inputOnChanged(mapKey, textValue) {
+    setState(() {
+      formValues.update(mapKey, (value) => textValue);
+    });
+  }
+
+  formOnSubmit() async {
+    if (formValues["otp"]!.isEmpty && formValues["otp"]!.length!=6) {
+      errorToast("OTP Required (6 digit) !");
+    } else {
+      setState(() {
+        loading = true;
+      });
+      bool res = await verifyOTPRequest(formValues['email'],formValues['otp']);
+      if (res == true) {
+        Navigator.pushNamed(context, '/pinVerification');
+      } else {
+        setState(() {
+          loading = false;
+        });
+      }
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

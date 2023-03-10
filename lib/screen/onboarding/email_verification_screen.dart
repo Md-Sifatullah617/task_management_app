@@ -47,7 +47,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
           screenBackground(context),
           Padding(
             padding: const EdgeInsets.all(30.0),
-            child: Column(
+            child: loading? const Center(child: CircularProgressIndicator()):Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
