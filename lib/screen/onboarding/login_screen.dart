@@ -119,15 +119,25 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const SizedBox(
                                   height: 15,
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, '/registration');
-                                  },
-                                  child: Text(
-                                    "Don't have a account",
-                                    style: head7Text(colorGreen),
-                                  ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Don't have a account?",
+                                      style: head7Text(colorDarkBlue),
+                                    ),
+                                    const SizedBox(width: 5,),
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, "/registration");
+                                      },
+                                      child: Text(
+                                        "Sign Up",
+                                        style: head7Text(colorGreen),
+                                      ),
+                                    ),
+                                  ],
                                 )
                               ],
                             ),
