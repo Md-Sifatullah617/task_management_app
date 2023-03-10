@@ -96,16 +96,42 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                               style: appButtonStyle(),
                               child: successButtonChild("Login")),
-                              const SizedBox(height: 40,),
-                              Container(
-                                alignment: Alignment.center,
-                                child: Column(
-                                    children: [
-                                        Text("Forget Password?"),
-                                        Text("Don't have a account")
-                                    ],
+                          const SizedBox(
+                            height: 40,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 15,
                                 ),
-                              )
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, '/emailVerification');
+                                  },
+                                  child: Text(
+                                    "Forget Password?",
+                                    style: head7Text(colorLightGray),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, '/registration');
+                                  },
+                                  child: Text(
+                                    "Don't have a account",
+                                    style: head7Text(colorGreen),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     ),
