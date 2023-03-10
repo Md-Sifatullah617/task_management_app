@@ -38,7 +38,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       errorToast("Mobile Number Required !");
     } else if (formValues["password"]!.isEmpty) {
       errorToast("Password Required !");
-    } else if (formValues["cpassword"]!.isEmpty) {
+    } else if (formValues["cpassword"]!=formValues["password"]) {
       errorToast("Confirm Password Should Be Same !");
     } else {
       setState(() {
