@@ -96,6 +96,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                               style: appButtonStyle(),
                               child: successButtonChild("Login")),
+                              const SizedBox(height: 40,),
+                              Container(
+                                alignment: Alignment.center,
+                                child: Column(
+                                    children: [
+                                        Text("Forget Password?"),
+                                        Text("Don't have a account")
+                                    ],
+                                ),
+                              )
                         ],
                       ),
                     ),
