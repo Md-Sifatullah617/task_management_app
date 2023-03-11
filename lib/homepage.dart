@@ -10,7 +10,7 @@ class MyHomePage extends StatelessWidget {
         title: const Text("Task Management", style: TextStyle(fontFamily: 'poppins', fontWeight: FontWeight.bold),),
       ),
       body: Column(
-        children: [
+        children: const [
 
         ],
       ),

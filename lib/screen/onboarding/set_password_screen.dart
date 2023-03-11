@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_management_app/api/api_client.dart';
+import 'package:task_management_app/utility/utilities.dart';
 
 import '../../style/style.dart';
 
@@ -19,7 +20,18 @@ class _SetPwdScreenState extends State<SetPwdScreen> {
   };
   bool loading = false;
 
-  
+  @override
+  initState() {
+    super.initState();
+    callStoreData();
+  }
+
+  callStoreData() async {
+    String? oTP = await readUserData("OTPVerification");
+    String? email = await readUserData("EmailVerification");
+    inputOnChanged("email", email);
+    inputOnChanged("OTP", oTP);
+  }
 
   inputOnChanged(mapKey, textValue) {
     setState(() {
@@ -30,7 +42,7 @@ class _SetPwdScreenState extends State<SetPwdScreen> {
   formOnSubmit() async {
     if (formValues['password']!.isEmpty) {
       errorToast("OTP Required (6 digit) !");
-    } else if (formValues['cpassword'] == formValues['password']) {
+    } else if (formValues['cpassword'] != formValues['password']) {
       errorToast('Password should be same !');
     } else {
       setState(() {
@@ -46,7 +58,7 @@ class _SetPwdScreenState extends State<SetPwdScreen> {
         });
       }
     }
-  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -76,8 +88,8 @@ class _SetPwdScreenState extends State<SetPwdScreen> {
                 ),
                 TextFormField(
                   decoration: appInputDecoration("Password"),
-                  onChanged: (value) {
-                    inputOnChanged("password", value);
+                  onChanged: (textValue) {
+                    inputOnChanged("password", textValue);
                   },
                 ),
                 const SizedBox(
@@ -85,15 +97,17 @@ class _SetPwdScreenState extends State<SetPwdScreen> {
                 ),
                 TextFormField(
                   decoration: appInputDecoration("Confirm Password"),
-                  onChanged: (value) {
-                    inputOnChanged("cpassword", value);
+                  onChanged: (textValue) {
+                    inputOnChanged("cpassword", textValue);
                   },
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      formOnSubmit();
+                    },
                     style: appButtonStyle(),
                     child: successButtonChild("Confirm")),
               ],
