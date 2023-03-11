@@ -72,7 +72,7 @@ Future<bool> verifyOTPRequest(email, oTP) async {
 }
 
 Future<bool> setPwdRequest(formValues) async {
-  var uRL = Uri.parse("$baseURL/RecoverVerifyEmail/RecoverResetPass");
+  var uRL = Uri.parse("$baseURL/RecoverResetPass");
   var postBody = json.encode(formValues);
   var response = await http.post(uRL, headers: requestHeader, body: postBody);
   var resultCode = response.statusCode;
