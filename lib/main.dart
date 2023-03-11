@@ -5,7 +5,8 @@ import 'package:task_management_app/screen/onboarding/pin_verification_screen.da
 import 'package:task_management_app/screen/onboarding/registration_screen.dart';
 import 'package:task_management_app/screen/onboarding/set_password_screen.dart';
 import 'package:task_management_app/screen/onboarding/splash_screen.dart';
-import 'package:task_management_app/screen/task/new_task_list_screen.dart';
+import 'package:task_management_app/screen/task/homepage_screen.dart';
+import 'package:task_management_app/Component/new_task_list.dart';
 import 'package:task_management_app/utility/utilities.dart';
 
 main() async {
@@ -14,7 +15,7 @@ main() async {
   if (token==null) {
     runApp(const MyApp('/login'));
   } else {
-    runApp(const MyApp('/newTaskList'));
+    runApp(const MyApp('/'));
   }
 }
 
@@ -33,13 +34,12 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: firstRoute,
       routes: {
-        '/': (context) => const SplashScreen(),
+        '/': (context) => const MyHomePage(),
         '/login': (context) => const LoginScreen(),
         '/registration': (context) => const RegistrationScreen(),
         '/emailVerification': (context) => const EmailVerificationScreen(),
         '/pinVerification': (context) => const PinVerificationScreen(),
         '/setPwd': (context) => const SetPwdScreen(),
-        '/newTaskList': (context) => const NewTaskScreen(),
       },
     );
   }
