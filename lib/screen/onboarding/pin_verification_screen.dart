@@ -37,7 +37,6 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
         setState(() {
           loading = false;
         });
-        errorToast("Please input currect pin");
       }
     }
   }
@@ -75,9 +74,11 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
                     animationType: AnimationType.fade,
                     animationDuration: const Duration(milliseconds: 300),
                     enableActiveFill: true,
-                    onCompleted: (v) {},
-                    onChanged: (textValue) {
-                      inputOnChanged("OTP", textValue);
+                    onCompleted: (v) {
+                      print("Completed");
+                    },
+                    onChanged: (value) {
+                      inputOnChanged("OTP", value);
                     }),
                 const SizedBox(
                   height: 20,
