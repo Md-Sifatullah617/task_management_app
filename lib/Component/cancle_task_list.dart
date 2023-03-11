@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class CancleTaskScreen extends StatefulWidget {
-  const CancleTaskScreen({Key? key}) : super(key: key);
+class CancelTaskList extends StatefulWidget {
+  const CancelTaskList({Key? key}) : super(key: key);
 
   @override
-  State<CancleTaskScreen> createState() => _CancleTaskScreenState();
+  State<CancelTaskList> createState() => _CancelTaskListState();
 }
 
-class _CancleTaskScreenState extends State<CancleTaskScreen> {
+class _CancelTaskListState extends State<CancelTaskList> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
+    return const Scaffold(
+body: Center(child: Text("cancle")),
     );
   }
 }

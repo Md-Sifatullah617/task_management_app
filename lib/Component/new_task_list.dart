@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class NewTaskScreen extends StatefulWidget {
-  const NewTaskScreen({Key? key}) : super(key: key);
+class NewTaskList extends StatefulWidget {
+  const NewTaskList({Key? key}) : super(key: key);
 
   @override
-  State<NewTaskScreen> createState() => _NewTaskScreenState();
+  State<NewTaskList> createState() => _NewTaskListState();
 }
 
-class _NewTaskScreenState extends State<NewTaskScreen> {
+class _NewTaskListState extends State<NewTaskList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: InkWell(
-              onTap: () {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, '/login', (route) => false);
-              },
-              child: Text("Hi"))),
+      body: Center(child: Text("new task")),
     );
   }
 }

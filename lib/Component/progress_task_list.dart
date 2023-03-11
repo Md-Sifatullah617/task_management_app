@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class ProgressTaskScreen extends StatefulWidget {
-  const ProgressTaskScreen({Key? key}) : super(key: key);
+class ProgressTaskList extends StatefulWidget {
+  const ProgressTaskList({Key? key}) : super(key: key);
 
   @override
-  State<ProgressTaskScreen> createState() => _ProgressTaskScreenState();
+  State<ProgressTaskList> createState() => _ProgressTaskListState();
 }
 
-class _ProgressTaskScreenState extends State<ProgressTaskScreen> {
+class _ProgressTaskListState extends State<ProgressTaskList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+body: Center(child: Text("progress")),
     );
   }
 }
