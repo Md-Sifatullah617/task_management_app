@@ -20,9 +20,14 @@ Future<void> writeOTPVerification(oTP) async {
   await prefs.setString("OTPVerification", oTP);
 }
 
-
 Future<String?> readUserData(key) async {
   final prefs = await SharedPreferences.getInstance();
   String? mydata = prefs.getString(key);
   return mydata;
+}
+
+Future<bool> removeToken() async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.remove("token");
+  return true;
 }
