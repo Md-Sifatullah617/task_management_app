@@ -31,6 +31,7 @@ TextStyle head6Text(textcolor) {
     fontWeight: FontWeight.w400,
   );
 }
+
 TextStyle head7Text(textcolor) {
   return TextStyle(
     color: textcolor,
@@ -143,4 +144,12 @@ PinTheme appOTPStyle() {
       borderWidth: 0.5,
       fieldWidth: 45,
       activeFillColor: colorWhite);
+}
+
+Container containerCard(child) {
+  return Container(
+    width: double.infinity,
+    padding: const EdgeInsets.all(10),
+    child: child,
+  );
 }

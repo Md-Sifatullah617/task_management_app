@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_management_app/Component/tast_list.dart';
 
 import '../api/api_client.dart';
 
@@ -32,6 +33,10 @@ class _CompletedTaskScreenState extends State<CompletedTaskList> {
         ? const Center(
             child: CircularProgressIndicator(),
           )
-        : const Center(child: Text("completed task"));
+        : RefreshIndicator(
+            onRefresh: () async {
+              await callData();
+            },
+            child: taskList(taskItems));
   }
 }
