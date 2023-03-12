@@ -11,7 +11,7 @@ class CompletedTaskList extends StatefulWidget {
 }
 
 class _CompletedTaskScreenState extends State<CompletedTaskList> {
-    List taskItems = [];
+  List taskItems = [];
   bool loading = true;
 
   @override
@@ -27,6 +27,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskList> {
       taskItems = data;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return loading
