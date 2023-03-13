@@ -21,7 +21,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskList> {
   }
 
   callData() async {
-    var data = await taskLIstRequest("completed");
+    var data = await taskLIstRequest("Completed");
     setState(() {
       loading = false;
       taskItems = data;
