@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:task_management_app/style/style.dart';
 
+import '../utility/utilities.dart';
+
 AppBar taskAppBar(context, profileDetails) {
   return AppBar(
     backgroundColor: colorGreen,
@@ -39,7 +41,13 @@ AppBar taskAppBar(context, profileDetails) {
     ),
     actions: [
       IconButton(onPressed: () {}, icon: const Icon(Icons.add_circle_outline)),
-      IconButton(onPressed: () {}, icon: const Icon(Icons.exit_to_app))
+      IconButton(
+          onPressed: () async {
+            await removeToken();
+            Navigator.pushNamedAndRemoveUntil(
+                context, "/login", (route) => false);
+          },
+          icon: const Icon(Icons.exit_to_app))
     ],
   );
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:task_management_app/Component/tast_list.dart';
 import 'package:task_management_app/api/api_client.dart';
 
@@ -22,10 +21,12 @@ class _NewTaskListState extends State<NewTaskList> {
 
   callData() async {
     var data = await taskLIstRequest("New");
-    setState(() {
-      loading = false;
-      taskItems = data;
-    });
+    if (mounted) {
+      setState(() {
+        loading = false;
+        taskItems = data;
+      });
+    }
   }
 
   @override

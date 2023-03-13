@@ -4,9 +4,7 @@ import 'package:task_management_app/screen/onboarding/login_screen.dart';
 import 'package:task_management_app/screen/onboarding/pin_verification_screen.dart';
 import 'package:task_management_app/screen/onboarding/registration_screen.dart';
 import 'package:task_management_app/screen/onboarding/set_password_screen.dart';
-import 'package:task_management_app/screen/onboarding/splash_screen.dart';
 import 'package:task_management_app/screen/task/homepage_screen.dart';
-import 'package:task_management_app/Component/new_task_list.dart';
 import 'package:task_management_app/utility/utilities.dart';
 
 main() async {
