@@ -21,6 +21,13 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomTabIndex = index;
     });
   }
+  Map<String, String> profileDetails = {
+    "firstName": "",
+    "lastName": "",
+    "email": "",
+    "photo": ""
+  };
+
 
   Future<void> callProfileStoredata() async {
     String? email = await readUserData("email");
@@ -40,12 +47,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Map<String, String> profileDetails = {
-    "firstName": "",
-    "lastName": "",
-    "email": "",
-    "photo": ""
-  };
 
   final widgetOptions = [
     const NewTaskList(),
