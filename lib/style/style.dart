@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -36,6 +38,14 @@ TextStyle head7Text(textcolor) {
   return TextStyle(
     color: textcolor,
     fontSize: 13,
+    fontFamily: 'poppins',
+    fontWeight: FontWeight.w400,
+  );
+}
+TextStyle head9Text(textcolor) {
+  return TextStyle(
+    color: textcolor,
+    fontSize: 10,
     fontFamily: 'poppins',
     fontWeight: FontWeight.w400,
   );
@@ -152,4 +162,10 @@ Container containerCard(child) {
     padding: const EdgeInsets.all(10),
     child: child,
   );
+}
+
+showBase64Image(base64String) {
+  UriData? data = Uri.parse(base64String).data;
+  Uint8List myImage = data!.contentAsBytes();
+  return myImage;
 }

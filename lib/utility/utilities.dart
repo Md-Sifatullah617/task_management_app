@@ -28,6 +28,6 @@ Future<String?> readUserData(key) async {
 
 Future<bool> removeToken() async {
   final prefs = await SharedPreferences.getInstance();
-  prefs.remove("token");
+  await prefs.clear();
   return true;
 }
