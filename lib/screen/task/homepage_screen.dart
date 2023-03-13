@@ -26,14 +26,8 @@ class _MyHomePageState extends State<MyHomePage> {
     "firstName": "",
     "lastName": "",
     "email": "",
-    "photo":
-        defaultProfilePicture
+    "photo": defaultProfilePicture
   };
-  @override
-  void initState() {
-    super.initState();
-    callProfileStoredata();
-  }
 
   Future<void> callProfileStoredata() async {
     String? email = await readUserData("email");
@@ -56,6 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
     const CompletedTaskList(),
     const CancelTaskList()
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    callProfileStoredata();
+  }
 
   @override
   Widget build(BuildContext context) {

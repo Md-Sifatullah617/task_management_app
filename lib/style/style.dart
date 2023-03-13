@@ -164,8 +164,4 @@ Container containerCard(child) {
   );
 }
 
-showBase64Image(base64String) {
-  UriData? data = Uri.parse(base64String).data;
-  Uint8List myImage = data!.contentAsBytes();
-  return myImage;
-}
+
