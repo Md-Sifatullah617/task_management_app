@@ -22,27 +22,30 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Map<String, String> profileDetails = {
-    "firstName": "",
-    "lastName": "",
-    "email": "",
-    "photo": defaultProfilePicture
-  };
-
   Future<void> callProfileStoredata() async {
     String? email = await readUserData("email");
     String? fname = await readUserData("firstName");
     String? lname = await readUserData("lastName");
     String? photo = await readUserData("photo");
     setState(() {
+      if (photo!.isEmpty) {
+        photo = defaultProfilePicture;
+      }
       profileDetails = {
         "firstName": "$fname",
         "lastName": "$lname",
         "email": "$email",
-        "photo": "$photo"
+        "photo": "$photo",
       };
     });
   }
+
+  Map<String, String> profileDetails = {
+    "firstName": "",
+    "lastName": "",
+    "email": "",
+    "photo": ""
+  };
 
   final widgetOptions = [
     const NewTaskList(),

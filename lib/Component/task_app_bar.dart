@@ -30,7 +30,7 @@ AppBar taskAppBar(context, profileDetails) {
                 style: head7Text(colorWhite),
               ),
               Text(
-                profileDetails["email"],
+                "${profileDetails["email"]}",
                 style: head9Text(colorWhite),
               )
             ],
