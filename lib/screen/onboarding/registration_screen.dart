@@ -46,7 +46,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       });
       bool res = await registrationRequest(formValues);
       if (res == true) {
-        Navigator.pushNamedAndRemoveUntil(context, "/login", (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, "/emailVerification", (route) => false);
       } else {
         setState(() {
           loading = false;

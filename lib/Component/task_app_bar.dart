@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:task_management_app/style/style.dart';
-
 import '../utility/utilities.dart';
 
 AppBar taskAppBar(context, profileDetails) {

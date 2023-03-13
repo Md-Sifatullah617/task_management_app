@@ -59,7 +59,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   height: 1,
                 ),
                 Text(
-                  "A 6 digit verification pin will send to your email address",
+                  "A 6 digit verification pin will be send to your email address",
                   style: head6Text(colorLightGray),
                 ),
                 const SizedBox(
