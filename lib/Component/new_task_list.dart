@@ -64,8 +64,9 @@ class _NewTaskListState extends State<NewTaskList> {
           return StatefulBuilder(builder: (constext, StateSetter setState) {
             return Container(
               padding: const EdgeInsets.all(30),
-              height: 300,
+              height: 350,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   RadioListTile(
                       title: const Text("New"),
@@ -103,6 +104,7 @@ class _NewTaskListState extends State<NewTaskList> {
                           status = value.toString();
                         });
                       }),
+                      const SizedBox(height: 10,),
                       ElevatedButton(
                         onPressed: (){}, 
                       style: appButtonStyle(),

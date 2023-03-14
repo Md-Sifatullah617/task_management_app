@@ -53,7 +53,7 @@ class _ProgressTaskListState extends State<ProgressTaskList> {
   }
 
 
-  String status = 'New';
+  String status = 'Progress';
   statusChange(id) async {
     showModalBottomSheet(
         context: context,

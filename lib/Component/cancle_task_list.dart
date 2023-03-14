@@ -53,7 +53,7 @@ class _CancelTaskListState extends State<CancelTaskList> {
   }
 
 
-  String status = 'New';
+  String status = 'Canceled';
   statusChange(id) async {
     showModalBottomSheet(
         context: context,
@@ -61,7 +61,7 @@ class _CancelTaskListState extends State<CancelTaskList> {
           return StatefulBuilder(builder: (constext, StateSetter setState) {
             return Container(
               padding: const EdgeInsets.all(30),
-              height: 300,
+              height: 350,
               child: Column(
                 children: [
                   RadioListTile(

@@ -53,7 +53,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskList> {
   }
 
 
-  String status = 'New';
+  String status = 'Completed';
   statusChange(id) async {
     showModalBottomSheet(
         context: context,
