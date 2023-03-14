@@ -29,31 +29,46 @@ class _CompletedTaskScreenState extends State<CompletedTaskList> {
     });
   }
 
-
   deleteItems(id) async {
-    showDialog(context: context, builder: (context){
-        return AlertDialog(
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
             title: const Text("Delete"),
             content: const Text("Once delete, you can't get it back"),
             actions: [
-                OutlinedButton(onPressed: () async {
+              OutlinedButton(
+                  onPressed: () async {
                     Navigator.pop(context);
                     setState(() {
-                      loading=true;
+                      loading = true;
                     });
                     await deleteTaskRequest(id);
                     await callData();
-                }, child: const Text("Yes")),
-                OutlinedButton(onPressed: (){
+                  },
+                  child: const Text("Yes")),
+              OutlinedButton(
+                  onPressed: () {
                     Navigator.pop(context);
-                }, child: const Text("No")),
+                  },
+                  child: const Text("No")),
             ],
-        );
+          );
+        });
+  }
+
+  String status = 'Completed';
+  updateStatus(id) async {
+    setState(() {
+      loading = true;
+    });
+    await updateTaskRequest(id, status);
+    await callData();
+    setState(() {
+      status = "Completed";
     });
   }
 
-
-  String status = 'Completed';
   statusChange(id) async {
     showModalBottomSheet(
         context: context,
@@ -73,7 +88,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskList> {
                           status = value.toString();
                         });
                       }),
-                      RadioListTile(
+                  RadioListTile(
                       title: const Text("Progress"),
                       value: "Progress",
                       groupValue: status,
@@ -82,7 +97,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskList> {
                           status = value.toString();
                         });
                       }),
-                      RadioListTile(
+                  RadioListTile(
                       title: const Text("Completed"),
                       value: "Completed",
                       groupValue: status,
@@ -91,7 +106,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskList> {
                           status = value.toString();
                         });
                       }),
-                      RadioListTile(
+                  RadioListTile(
                       title: const Text("Canceled"),
                       value: "Canceled",
                       groupValue: status,
@@ -100,18 +115,11 @@ class _CompletedTaskScreenState extends State<CompletedTaskList> {
                           status = value.toString();
                         });
                       }),
-                      ElevatedButton(
-                        onPressed: () async {
-                            Navigator.pop(context);
-                        setState(() {
-                          loading = true;
-                        });
-                        await updateTaskRequest(id, status);
-                        await callData();
-                        setState(() {
-                          status = "Completed";
-                        });
-                        }, 
+                  ElevatedButton(
+                      onPressed: () async {
+                        Navigator.pop(context);
+                        updateStatus(id);
+                      },
                       style: appButtonStyle(),
                       child: successButtonChild("Confirm"))
                 ],
