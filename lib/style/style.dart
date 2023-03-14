@@ -42,6 +42,7 @@ TextStyle head7Text(textcolor) {
     fontWeight: FontWeight.w400,
   );
 }
+
 TextStyle head9Text(textcolor) {
   return TextStyle(
     color: textcolor,
@@ -164,4 +165,18 @@ Container containerCard(child) {
   );
 }
 
-
+Container statusChild(statusText, statusColor) {
+  return Container(
+    alignment: Alignment.center,
+    height: 20,
+    width: 60,
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: statusColor),
+    child: Text(
+      statusText,
+      style: const TextStyle(
+          color: colorWhite, fontSize: 10, fontWeight: FontWeight.w400),
+    ),
+  );
+}
