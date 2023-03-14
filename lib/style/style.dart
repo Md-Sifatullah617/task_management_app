@@ -100,6 +100,11 @@ ButtonStyle appButtonStyle() {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)));
 }
 
+ButtonStyle tinyButtonStyle(btnColor) {
+  return ElevatedButton.styleFrom(
+      elevation: 1, padding: EdgeInsets.zero, backgroundColor: btnColor);
+}
+
 TextStyle buttonTextStyle() {
   return const TextStyle(
       fontSize: 14, fontFamily: 'poppins', fontWeight: FontWeight.w400);
@@ -171,8 +176,7 @@ Container statusChild(statusText, statusColor) {
     height: 20,
     width: 60,
     decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: statusColor),
+        borderRadius: BorderRadius.circular(20), color: statusColor),
     child: Text(
       statusText,
       style: const TextStyle(

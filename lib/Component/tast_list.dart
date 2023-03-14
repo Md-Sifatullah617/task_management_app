@@ -8,9 +8,9 @@ ListView taskList(taskItems) {
         Color statusColor = colorGreen;
         if (taskItems[index]['status'] == "New") {
           statusColor = colorBlue;
-        }else if (taskItems[index]['status'] == "Progress") {
+        } else if (taskItems[index]['status'] == "Progress") {
           statusColor = colorOrange;
-        }else if (taskItems[index]['status'] == "Canceled") {
+        } else if (taskItems[index]['status'] == "Canceled") {
           statusColor = colorRed;
         }
         return Card(
@@ -35,14 +35,37 @@ ListView taskList(taskItems) {
                 height: 10,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   statusChild(taskItems[index]['status'], statusColor),
-                  Container(
-                    child: Row(
-                        children: [
-                            
-                        ],
-                    ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 50,
+                        height: 30,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: tinyButtonStyle(colorBlue),
+                          child: const Icon(
+                            Icons.edit_note_outlined,
+                            size: 16,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10,),
+                      SizedBox(
+                        width: 50,
+                        height: 30,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: tinyButtonStyle(colorRed),
+                          child: const Icon(
+                            Icons.delete_outline,
+                            size: 16,
+                          ),
+                        ),
+                      )
+                    ],
                   )
                 ],
               )
