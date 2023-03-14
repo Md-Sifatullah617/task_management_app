@@ -16,28 +16,31 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int bottomTabIndex = 0;
+  Map<String, String> profileDetails = {
+    "firstName": "",
+    "lastName": "",
+    "email": "",
+    "photo": defaultProfilePicture
+  };
   onTappedIndexChange(int index) {
     setState(() {
       bottomTabIndex = index;
     });
   }
-  Map<String, String> profileDetails = {
-    "firstName": "",
-    "lastName": "",
-    "email": "",
-    "photo": ""
-  };
 
+  final widgetOptions = [
+    const NewTaskList(),
+    const ProgressTaskList(),
+    const CompletedTaskList(),
+    const CancelTaskList()
+  ];
 
-  Future<void> callProfileStoredata() async {
+callProfileStoredata() async {
     String? email = await readUserData("email");
     String? fname = await readUserData("firstName");
     String? lname = await readUserData("lastName");
     String? photo = await readUserData("photo");
     setState(() {
-      if (photo!.isEmpty) {
-        photo = defaultProfilePicture;
-      }
       profileDetails = {
         "firstName": "$fname",
         "lastName": "$lname",
@@ -46,14 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
       };
     });
   }
-
-
-  final widgetOptions = [
-    const NewTaskList(),
-    const ProgressTaskList(),
-    const CompletedTaskList(),
-    const CancelTaskList()
-  ];
 
   @override
   void initState() {
