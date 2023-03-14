@@ -108,13 +108,13 @@ class _NewTaskListState extends State<NewTaskList> {
                     height: 10,
                   ),
                   ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         Navigator.pop(context);
                         setState(() {
                           loading = true;
                         });
-                        updateTaskRequest(id, status);
-                        callData();
+                        await updateTaskRequest(id, status);
+                        await callData();
                         setState(() {
                           status = "New";
                         });

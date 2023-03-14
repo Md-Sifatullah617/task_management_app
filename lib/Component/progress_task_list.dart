@@ -101,13 +101,13 @@ class _ProgressTaskListState extends State<ProgressTaskList> {
                         });
                       }),
                       ElevatedButton(
-                        onPressed: (){
+                        onPressed: () async {
                             Navigator.pop(context);
                         setState(() {
                           loading = true;
                         });
-                        updateTaskRequest(id, status);
-                        callData();
+                        await updateTaskRequest(id, status);
+                        await callData();
                         setState(() {
                           status = "Progress";
                         });
