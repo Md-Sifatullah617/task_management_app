@@ -40,9 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
     String? fname = await readUserData("firstName");
     String? lname = await readUserData("lastName");
     String? photo = await readUserData("photo");
-    if (photo == '') {
-      photo = defaultProfilePicture;
-    }
+    photo ??= defaultProfilePicture;
     setState(() {
       profileDetails = {
         "firstName": "$fname",
