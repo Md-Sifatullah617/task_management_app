@@ -77,7 +77,7 @@ class _NewTaskListState extends State<NewTaskList> {
                           status = value.toString();
                         });
                       }),
-                      RadioListTile(
+                  RadioListTile(
                       title: const Text("Progress"),
                       value: "Progress",
                       groupValue: status,
@@ -86,7 +86,7 @@ class _NewTaskListState extends State<NewTaskList> {
                           status = value.toString();
                         });
                       }),
-                      RadioListTile(
+                  RadioListTile(
                       title: const Text("Completed"),
                       value: "Completed",
                       groupValue: status,
@@ -95,7 +95,7 @@ class _NewTaskListState extends State<NewTaskList> {
                           status = value.toString();
                         });
                       }),
-                      RadioListTile(
+                  RadioListTile(
                       title: const Text("Canceled"),
                       value: "Canceled",
                       groupValue: status,
@@ -104,9 +104,21 @@ class _NewTaskListState extends State<NewTaskList> {
                           status = value.toString();
                         });
                       }),
-                      const SizedBox(height: 10,),
-                      ElevatedButton(
-                        onPressed: (){}, 
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        setState(() {
+                          loading = true;
+                        });
+                        updateTaskRequest(id, status);
+                        callData();
+                        setState(() {
+                          status = "New";
+                        });
+                      },
                       style: appButtonStyle(),
                       child: successButtonChild("Confirm"))
                 ],

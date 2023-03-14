@@ -101,7 +101,17 @@ class _CompletedTaskScreenState extends State<CompletedTaskList> {
                         });
                       }),
                       ElevatedButton(
-                        onPressed: (){}, 
+                        onPressed: (){
+                            Navigator.pop(context);
+                        setState(() {
+                          loading = true;
+                        });
+                        updateTaskRequest(id, status);
+                        callData();
+                        setState(() {
+                          status = "Completed";
+                        });
+                        }, 
                       style: appButtonStyle(),
                       child: successButtonChild("Confirm"))
                 ],
