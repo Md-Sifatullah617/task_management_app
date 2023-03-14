@@ -39,7 +39,9 @@ AppBar taskAppBar(context, profileDetails) {
       ),
     ),
     actions: [
-      IconButton(onPressed: () {}, icon: const Icon(Icons.add_circle_outline)),
+      IconButton(onPressed: () {
+        Navigator.pushNamed(context, '/taskCreate');
+      }, icon: const Icon(Icons.add_circle_outline)),
       IconButton(
           onPressed: () async {
             await removeToken();
