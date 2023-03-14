@@ -20,7 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
     "firstName": "",
     "lastName": "",
     "email": "",
-    "photo": defaultProfilePicture
+    "photo": '',
   };
   onTappedIndexChange(int index) {
     setState(() {
@@ -35,11 +35,14 @@ class _MyHomePageState extends State<MyHomePage> {
     const CancelTaskList()
   ];
 
-callProfileStoredata() async {
+  callProfileStoredata() async {
     String? email = await readUserData("email");
     String? fname = await readUserData("firstName");
     String? lname = await readUserData("lastName");
     String? photo = await readUserData("photo");
+    if (photo == '') {
+      photo = defaultProfilePicture;
+    }
     setState(() {
       profileDetails = {
         "firstName": "$fname",
