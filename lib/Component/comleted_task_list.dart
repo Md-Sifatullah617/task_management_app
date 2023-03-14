@@ -76,7 +76,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskList> {
           return StatefulBuilder(builder: (constext, StateSetter setState) {
             return Container(
               padding: const EdgeInsets.all(30),
-              height: 300,
+              height: 350,
               child: Column(
                 children: [
                   RadioListTile(

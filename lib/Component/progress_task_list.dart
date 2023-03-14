@@ -76,7 +76,7 @@ class _ProgressTaskListState extends State<ProgressTaskList> {
           return StatefulBuilder(builder: (constext, StateSetter setState) {
             return Container(
               padding: const EdgeInsets.all(30),
-              height: 300,
+              height: 350,
               child: Column(
                 children: [
                   RadioListTile(
