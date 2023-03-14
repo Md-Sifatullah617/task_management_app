@@ -60,7 +60,7 @@ ListView taskList(taskItems, deleteItems) {
                         height: 30,
                         child: ElevatedButton(
                           onPressed: () {
-                            deleteItems[index]['_id'];
+                            deleteItems(taskItems[index]['_id']);
                           },
                           style: tinyButtonStyle(colorRed),
                           child: const Icon(
