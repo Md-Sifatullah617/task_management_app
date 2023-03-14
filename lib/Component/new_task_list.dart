@@ -21,12 +21,10 @@ class _NewTaskListState extends State<NewTaskList> {
 
   callData() async {
     var data = await taskLIstRequest("New");
-    if (mounted) {
-      setState(() {
-        loading = false;
-        taskItems = data;
-      });
-    }
+    setState(() {
+      loading = false;
+      taskItems = data;
+    });
   }
 
   @override
