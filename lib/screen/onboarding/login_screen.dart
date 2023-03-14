@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (res == true) {
         //navigate to dashboard
         Navigator.pushNamedAndRemoveUntil(
-            context, "/", (route) => false);
+            context, "/mainPage", (route) => false);
       } else {
         setState(() {
           loading = false;

@@ -4,23 +4,17 @@ import 'package:task_management_app/screen/onboarding/login_screen.dart';
 import 'package:task_management_app/screen/onboarding/pin_verification_screen.dart';
 import 'package:task_management_app/screen/onboarding/registration_screen.dart';
 import 'package:task_management_app/screen/onboarding/set_password_screen.dart';
+import 'package:task_management_app/screen/onboarding/splash_screen.dart';
+import 'package:task_management_app/screen/profile/profileUpdateScreen.dart';
 import 'package:task_management_app/screen/task/homepage_screen.dart';
 import 'package:task_management_app/screen/task/task_create_screen.dart';
-import 'package:task_management_app/utility/utilities.dart';
 
-main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  String? token = await readUserData('token');
-  if (token==null) {
-    runApp(const MyApp('/login'));
-  } else {
-    runApp(const MyApp('/'));
-  }
+main() {
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final String firstRoute;
-  const MyApp(this.firstRoute, {super.key});
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -31,15 +25,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: firstRoute,
+      initialRoute: '/',
       routes: {
-        '/': (context) => const MyHomePage(),
+        '/': (context) => const SplashScreen(),
+        '/mainPage': (context) => const MyHomePage(),
         '/login': (context) => const LoginScreen(),
         '/registration': (context) => const RegistrationScreen(),
         '/emailVerification': (context) => const EmailVerificationScreen(),
         '/pinVerification': (context) => const PinVerificationScreen(),
         '/setPwd': (context) => const SetPwdScreen(),
-        '/taskCreate':(context) => const TaskCreateScreen(),
+        '/taskCreate': (context) => const TaskCreateScreen(),
+        '/updateProfile': (context) => const ProfileUpdateScreen(),
       },
     );
   }
