@@ -29,7 +29,7 @@ class _ProgressTaskListState extends State<ProgressTaskList> {
   }
 
 
-  deleteItems(id) {
+  deleteItems(id) async{
     showDialog(context: context, builder: (context){
         return AlertDialog(
             title: const Text("Delete"),

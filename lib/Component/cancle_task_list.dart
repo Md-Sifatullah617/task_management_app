@@ -29,7 +29,7 @@ class _CancelTaskListState extends State<CancelTaskList> {
   }
 
 
-  deleteItems(id) {
+  deleteItems(id) async{
     showDialog(context: context, builder: (context){
         return AlertDialog(
             title: const Text("Delete"),

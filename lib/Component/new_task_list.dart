@@ -27,7 +27,7 @@ class _NewTaskListState extends State<NewTaskList> {
     });
   }
 
-  deleteItems(id) {
+  deleteItems(id) async {
     showDialog(context: context, builder: (context){
         return AlertDialog(
             title: const Text("Delete"),
