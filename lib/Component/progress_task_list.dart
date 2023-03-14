@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task_management_app/Component/tast_list.dart';
 
 import '../api/api_client.dart';
+import '../style/style.dart';
 
 class ProgressTaskList extends StatefulWidget {
   const ProgressTaskList({Key? key}) : super(key: key);
@@ -50,6 +51,66 @@ class _ProgressTaskListState extends State<ProgressTaskList> {
         );
     });
   }
+
+
+  String status = 'New';
+  statusChange(id) async {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(builder: (constext, StateSetter setState) {
+            return Container(
+              padding: const EdgeInsets.all(30),
+              height: 300,
+              child: Column(
+                children: [
+                  RadioListTile(
+                      title: const Text("New"),
+                      value: "New",
+                      groupValue: status,
+                      onChanged: (value) {
+                        setState(() {
+                          status = value.toString();
+                        });
+                      }),
+                      RadioListTile(
+                      title: const Text("Progress"),
+                      value: "Progress",
+                      groupValue: status,
+                      onChanged: (value) {
+                        setState(() {
+                          status = value.toString();
+                        });
+                      }),
+                      RadioListTile(
+                      title: const Text("Completed"),
+                      value: "Completed",
+                      groupValue: status,
+                      onChanged: (value) {
+                        setState(() {
+                          status = value.toString();
+                        });
+                      }),
+                      RadioListTile(
+                      title: const Text("Canceled"),
+                      value: "Canceled",
+                      groupValue: status,
+                      onChanged: (value) {
+                        setState(() {
+                          status = value.toString();
+                        });
+                      }),
+                      ElevatedButton(
+                        onPressed: (){}, 
+                      style: appButtonStyle(),
+                      child: successButtonChild("Confirm"))
+                ],
+              ),
+            );
+          });
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return loading
@@ -60,6 +121,6 @@ class _ProgressTaskListState extends State<ProgressTaskList> {
             onRefresh: () async {
               await callData();
             },
-            child: taskList(taskItems, deleteItems));
+            child: taskList(taskItems, deleteItems, statusChange));
   }
 }

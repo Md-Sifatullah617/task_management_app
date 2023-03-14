@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_management_app/Component/tast_list.dart';
 import 'package:task_management_app/api/api_client.dart';
+import 'package:task_management_app/style/style.dart';
 
 class NewTaskList extends StatefulWidget {
   const NewTaskList({Key? key}) : super(key: key);
@@ -28,25 +29,89 @@ class _NewTaskListState extends State<NewTaskList> {
   }
 
   deleteItems(id) async {
-    showDialog(context: context, builder: (context){
-        return AlertDialog(
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
             title: const Text("Delete"),
             content: const Text("Once delete, you can't get it back"),
             actions: [
-                OutlinedButton(onPressed: () async {
+              OutlinedButton(
+                  onPressed: () async {
                     Navigator.pop(context);
                     setState(() {
-                      loading=true;
+                      loading = true;
                     });
                     await deleteTaskRequest(id);
                     await callData();
-                }, child: const Text("Yes")),
-                OutlinedButton(onPressed: (){
+                  },
+                  child: const Text("Yes")),
+              OutlinedButton(
+                  onPressed: () {
                     Navigator.pop(context);
-                }, child: const Text("No")),
+                  },
+                  child: const Text("No")),
             ],
-        );
-    });
+          );
+        });
+  }
+
+  String status = 'New';
+  statusChange(id) async {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(builder: (constext, StateSetter setState) {
+            return Container(
+              padding: const EdgeInsets.all(30),
+              height: 300,
+              child: Column(
+                children: [
+                  RadioListTile(
+                      title: const Text("New"),
+                      value: "New",
+                      groupValue: status,
+                      onChanged: (value) {
+                        setState(() {
+                          status = value.toString();
+                        });
+                      }),
+                      RadioListTile(
+                      title: const Text("Progress"),
+                      value: "Progress",
+                      groupValue: status,
+                      onChanged: (value) {
+                        setState(() {
+                          status = value.toString();
+                        });
+                      }),
+                      RadioListTile(
+                      title: const Text("Completed"),
+                      value: "Completed",
+                      groupValue: status,
+                      onChanged: (value) {
+                        setState(() {
+                          status = value.toString();
+                        });
+                      }),
+                      RadioListTile(
+                      title: const Text("Canceled"),
+                      value: "Canceled",
+                      groupValue: status,
+                      onChanged: (value) {
+                        setState(() {
+                          status = value.toString();
+                        });
+                      }),
+                      ElevatedButton(
+                        onPressed: (){}, 
+                      style: appButtonStyle(),
+                      child: successButtonChild("Confirm"))
+                ],
+              ),
+            );
+          });
+        });
   }
 
   @override
@@ -59,6 +124,6 @@ class _NewTaskListState extends State<NewTaskList> {
             onRefresh: () async {
               await callData();
             },
-            child: taskList(taskItems, deleteItems));
+            child: taskList(taskItems, deleteItems, statusChange));
   }
 }
