@@ -31,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
         loading = true;
       });
     //Store password on sharedpreferences
-    //   await AuthDetails.writePassword(formValues["password"]);
+      await writePassword(formValues["password"]);
       bool res = await loginRequest(formValues);
       if (res == true) {
         //navigate to dashboard

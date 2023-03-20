@@ -23,10 +23,10 @@ Future<void> writeOTPVerification(oTP) async {
   await prefs.setString("OTPVerification", oTP);
 }
 
-// Future<void> writePassword(storepassword) async {
-//   final prefs = await SharedPreferences.getInstance();
-//   await prefs.setString("savedPassword", storepassword);
-// }
+Future<void> writePassword(storepassword) async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setString("savedPassword", storepassword);
+}
 
 Future<String?> readUserData(key) async {
   final prefs = await SharedPreferences.getInstance();
@@ -48,4 +48,9 @@ Future<bool> removeToken() async {
   final prefs = await SharedPreferences.getInstance();
   await prefs.clear();
   return true;
+}
+
+Future<void> updateValues(String mapKey, String textValue) async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setString(mapKey, textValue);
 }
