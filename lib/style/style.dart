@@ -196,3 +196,25 @@ showimage64(base64String) {
   }
   return image;
 }
+
+statuscount(status,statusnumber){
+  return Expanded(
+    child: Card(
+      elevation: 0,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            FittedBox(
+              child: Text(statusnumber,style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold
+              ),),
+            ),
+            FittedBox(child: Text(status))
+          ],
+        ),
+      ),
+    ),
+  );
+}

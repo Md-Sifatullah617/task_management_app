@@ -184,3 +184,23 @@ Future<bool> updateProfile(formValues) async {
     return false;
   }
 }
+
+
+Future<List> taskCountRequest() async {
+  var uRL = Uri.parse("$baseURL/taskStatusCount");
+  String? token = await readUserData("token");
+  var requestHeaderWithToken = {
+    "Content-Type": "application/json",
+    "token": "$token"
+  };
+  var response = await http.get(uRL, headers: requestHeaderWithToken);
+  var resultCode = response.statusCode;
+  var resultBody = json.decode(response.body);
+  if (resultCode == 200 && resultBody["status"] == "success") {
+    successToast("Request Success");
+    return resultBody['data'];
+  } else {
+    errorToast("Request fail ! try again");
+    return [];
+  }
+}

@@ -11,13 +11,43 @@ class NewTaskList extends StatefulWidget {
 }
 
 class _NewTaskListState extends State<NewTaskList> {
+  List counttask = [];
+  int newtaskcount = 0,
+      completetaskcount = 0,
+      progresstaskcount = 0,
+      canceltaskcount = 0;
+
   List taskItems = [];
   bool loading = true;
+  String Status = "New";
 
   @override
   initState() {
     super.initState();
     callData();
+    tastCount();
+  }
+
+  tastCount() async {
+    var data = await taskCountRequest();
+    setState(() {
+      counttask = data;
+      newtaskcount = 0;
+      completetaskcount = 0;
+      progresstaskcount = 0;
+      canceltaskcount = 0;
+      counttask.forEach((element) {
+        if (element["_id"] == "New") {
+          newtaskcount = element["sum"];
+        } else if (element["_id"] == "Completed") {
+          completetaskcount = element["sum"];
+        } else if (element["_id"] == "Progress") {
+          progresstaskcount = element["sum"];
+        } else if (element["_id"] == "Canceled") {
+          canceltaskcount = element["sum"];
+        }
+      });
+    });
   }
 
   callData() async {
@@ -142,6 +172,18 @@ class _NewTaskListState extends State<NewTaskList> {
             onRefresh: () async {
               await callData();
             },
-            child: taskList(taskItems, deleteItems, statusChange));
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    statuscount("New", newtaskcount.toString()),
+                    statuscount("Progress", progresstaskcount.toString()),
+                    statuscount("Completed", completetaskcount.toString()),
+                    statuscount("Canceled", canceltaskcount.toString()),
+                  ],
+                ),
+                Expanded(child: taskList(taskItems, deleteItems, statusChange)),
+              ],
+            ));
   }
 }
