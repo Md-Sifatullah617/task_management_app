@@ -17,7 +17,7 @@ AppBar taskAppBar(context, profileDetails) {
                   radius: 20,
                   child: ClipOval(
                     child:
-                        Text(profileDetails['email'].toString().substring(0,1), style: const TextStyle(fontSize: 30), textAlign: TextAlign.center,)
+                        Text(profileDetails['email'].substring(0,1), style: const TextStyle(fontSize: 30), textAlign: TextAlign.center,)
                   ),
                 ),
                 title: Text(

@@ -5,11 +5,6 @@ import 'package:task_management_app/utility/utilities.dart';
 
 var baseURL = "https://task.teamrabbil.com/api/v1";
 var requestHeader = {"Content-Type": "application/json"};
-Future<String?> token = readUserData("token");
-  var requestHeaderWithToken = {
-    "Content-Type": "application/json",
-    "token": "$token"
-  };
 
 Future<bool> loginRequest(formValues) async {
   var uRL = Uri.parse("$baseURL/login");
@@ -93,6 +88,11 @@ Future<bool> setPwdRequest(formValues) async {
 
 Future<List> taskLIstRequest(status) async {
   var uRL = Uri.parse("$baseURL/listTaskByStatus/$status");
+  String? token = await readUserData("token");
+  var requestHeaderWithToken = {
+    "Content-Type": "application/json",
+    "token": "$token"
+  };
   var response = await http.get(uRL, headers: requestHeaderWithToken);
   var resultCode = response.statusCode;
   var resultBody = json.decode(response.body);
@@ -108,6 +108,11 @@ Future<List> taskLIstRequest(status) async {
 Future<bool> taskCreateRequest(formValues) async {
   var uRL = Uri.parse("$baseURL/createTask");
   var postBody = json.encode(formValues);
+  String? token = await readUserData("token");
+  var requestHeaderWithToken = {
+    "Content-Type": "application/json",
+    "token": "$token"
+  };
   var response =
       await http.post(uRL, headers: requestHeaderWithToken, body: postBody);
   var resultCode = response.statusCode;
@@ -123,6 +128,11 @@ Future<bool> taskCreateRequest(formValues) async {
 
 Future<bool> deleteTaskRequest(id) async {
   var uRL = Uri.parse("$baseURL/deleteTask/$id");
+  String? token = await readUserData("token");
+  var requestHeaderWithToken = {
+    "Content-Type": "application/json",
+    "token": "$token"
+  };
   var response = await http.get(uRL, headers: requestHeaderWithToken);
   var resultCode = response.statusCode;
   var resultBody = json.decode(response.body);
@@ -137,6 +147,11 @@ Future<bool> deleteTaskRequest(id) async {
 
 Future<bool> updateTaskRequest(id, status) async {
   var uRL = Uri.parse("$baseURL/updateTaskStatus/$id/$status");
+  String? token = await readUserData("token");
+  var requestHeaderWithToken = {
+    "Content-Type": "application/json",
+    "token": "$token"
+  };
   var response = await http.get(uRL, headers: requestHeaderWithToken);
   var resultCode = response.statusCode;
   var resultBody = json.decode(response.body);
@@ -152,6 +167,11 @@ Future<bool> updateTaskRequest(id, status) async {
 Future<bool> updateProfile(formValues) async {
   var uRL = Uri.parse("$baseURL/profileUpdate");
   var postBody = json.encode(formValues);
+  String? token = await readUserData("token");
+  var requestHeaderWithToken = {
+    "Content-Type": "application/json",
+    "token": "$token"
+  };
   var response =
       await http.post(uRL, headers: requestHeaderWithToken, body: postBody);
   var resultCode = response.statusCode;
