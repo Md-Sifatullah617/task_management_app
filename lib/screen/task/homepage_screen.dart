@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
     "firstName": "",
     "lastName": "",
     "email": "",
-    "photo": defaultProfilePic
+    "photo": "",
   };
 
   callStoredData() async {

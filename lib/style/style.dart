@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -183,4 +184,15 @@ Container statusChild(statusText, statusColor) {
           color: colorWhite, fontSize: 10, fontWeight: FontWeight.w400),
     ),
   );
+}
+
+showimage64(base64String) {
+  UriData? data = Uri.parse(base64String).data;
+  Uint8List image;
+  if(data != null) {
+    image = data.contentAsBytes();
+  } else {
+    image = base64Decode(base64String);
+  }
+  return image;
 }

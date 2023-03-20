@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:task_management_app/style/style.dart';
 import '../utility/utilities.dart';
 
 AppBar taskAppBar(context, profileDetails) {
+  var avatar = profileDetails['photo'];
+  if (avatar == '') {
+    avatar = defaultProfilePic;
+  }
   return AppBar(
     backgroundColor: colorGreen,
     flexibleSpace: Container(
@@ -13,11 +19,11 @@ AppBar taskAppBar(context, profileDetails) {
               Navigator.pushNamed(context, "/updateProfile");
             },
             child: ListTile(
-                leading: CircleAvatar(
-                  radius: 20,
-                  child: ClipOval(
-                    child:
-                        Text(profileDetails['email'].substring(0,1), style: const TextStyle(fontSize: 30), textAlign: TextAlign.center,)
+                leading: ClipOval(
+                  child: SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: Image.memory(showimage64(avatar), fit: BoxFit.cover,),
                   ),
                 ),
                 title: Text(
