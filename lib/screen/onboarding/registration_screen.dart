@@ -29,6 +29,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
 
   formOnSubmit() async {
+    Navigator.pushNamedAndRemoveUntil(
+        context, "/emailVerification", (route) => false);
     if (formValues["email"]!.isEmpty) {
       errorToast("Email Required !");
     } else if (formValues["firstName"]!.isEmpty) {
@@ -46,6 +48,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         loading = true;
       });
       bool res = await registrationRequest(formValues);
+
       if (res == true) {
         Navigator.pushNamedAndRemoveUntil(
             context, "/emailVerification", (route) => false);

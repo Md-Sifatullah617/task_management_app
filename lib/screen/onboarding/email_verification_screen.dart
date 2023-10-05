@@ -22,6 +22,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   }
 
   formOnSubmit() async {
+    Navigator.pushNamed(context, '/pinVerification');
     if (formValues["email"]!.isEmpty) {
       errorToast("Email Required !");
     } else {
@@ -47,41 +48,43 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
           screenBackground(context),
           Padding(
             padding: const EdgeInsets.all(30.0),
-            child: loading? const Center(child: CircularProgressIndicator()):Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Your Email Address",
-                  style: head1Text(colorDarkBlue),
-                ),
-                const SizedBox(
-                  height: 1,
-                ),
-                Text(
-                  "A 6 digit verification pin will be send to your email address",
-                  style: head6Text(colorLightGray),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  onChanged: (textValue) {
-                    inputOnChanged('email', textValue);
-                  },
-                  decoration: appInputDecoration("Email Address"),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      formOnSubmit();
-                    },
-                    style: appButtonStyle(),
-                    child: successButtonChild("Next")),
-              ],
-            ),
+            child: loading
+                ? const Center(child: CircularProgressIndicator())
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Your Email Address",
+                        style: head1Text(colorDarkBlue),
+                      ),
+                      const SizedBox(
+                        height: 1,
+                      ),
+                      Text(
+                        "A 6 digit verification pin will be send to your email address",
+                        style: head6Text(colorLightGray),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        onChanged: (textValue) {
+                          inputOnChanged('email', textValue);
+                        },
+                        decoration: appInputDecoration("Email Address"),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            formOnSubmit();
+                          },
+                          style: appButtonStyle(),
+                          child: successButtonChild("Next")),
+                    ],
+                  ),
           )
         ],
       ),

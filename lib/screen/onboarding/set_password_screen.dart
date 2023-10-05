@@ -28,7 +28,7 @@ class _SetPwdScreenState extends State<SetPwdScreen> {
 
   callStoreData() async {
     String? oTP = await readUserData("OTPVerification");
-    String? email =  await readUserData("email");
+    String? email = await readUserData("email");
     inputOnChanged("email", email);
     inputOnChanged("OTP", oTP);
   }
@@ -40,6 +40,7 @@ class _SetPwdScreenState extends State<SetPwdScreen> {
   }
 
   formOnSubmit() async {
+    Navigator.pushNamedAndRemoveUntil(context, '/login', ((route) => false));
     if (formValues['password']!.isEmpty) {
       errorToast("OTP Required (6 digit) !");
     } else if (formValues['cpassword'] != formValues['password']) {
@@ -58,7 +59,7 @@ class _SetPwdScreenState extends State<SetPwdScreen> {
         });
       }
     }
-}
+  }
 
   @override
   Widget build(BuildContext context) {

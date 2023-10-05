@@ -22,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   formOnSubmit() async {
+    Navigator.pushNamedAndRemoveUntil(context, "/mainPage", (route) => false);
     if (formValues["email"]!.isEmpty) {
       errorToast("Email Required !");
     } else if (formValues["password"]!.isEmpty) {
@@ -30,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         loading = true;
       });
-    //Store password on sharedpreferences
+      //Store password on sharedpreferences
       await writePassword(formValues["password"]);
       bool res = await loginRequest(formValues);
       if (res == true) {
@@ -57,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ? (const Center(child: (CircularProgressIndicator())))
                 : (SingleChildScrollView(
                     child: Container(
-                        alignment: Alignment.center,
+                      alignment: Alignment.center,
                       padding: const EdgeInsets.all(30.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -131,7 +132,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                       "Don't have a account?",
                                       style: head7Text(colorDarkBlue),
                                     ),
-                                    const SizedBox(width: 5,),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
                                     InkWell(
                                       onTap: () {
                                         Navigator.pushNamed(
