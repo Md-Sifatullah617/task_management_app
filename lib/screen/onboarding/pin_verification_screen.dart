@@ -23,7 +23,6 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
   }
 
   formOnSubmit() async {
-    Navigator.pushNamed(context, '/setPwd');
     if (formValues['OTP']!.length != 6) {
       errorToast("OTP Required (6 digit) !");
     } else {
@@ -32,7 +31,6 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
       });
       String? emailAddress = await readUserData("email");
       bool res = await verifyOTPRequest(emailAddress, formValues['OTP']);
-
       if (res == true) {
         Navigator.pushNamed(context, '/setPwd');
       } else {

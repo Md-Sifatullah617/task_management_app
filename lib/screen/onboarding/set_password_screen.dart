@@ -40,7 +40,6 @@ class _SetPwdScreenState extends State<SetPwdScreen> {
   }
 
   formOnSubmit() async {
-    Navigator.pushNamedAndRemoveUntil(context, '/login', ((route) => false));
     if (formValues['password']!.isEmpty) {
       errorToast("OTP Required (6 digit) !");
     } else if (formValues['cpassword'] != formValues['password']) {

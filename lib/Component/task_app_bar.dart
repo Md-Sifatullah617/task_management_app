@@ -5,6 +5,7 @@ import 'package:task_management_app/style/style.dart';
 import '../utility/utilities.dart';
 
 AppBar taskAppBar(context, profileDetails) {
+  final double width = MediaQuery.of(context).size.width;
   var avatar = profileDetails['photo'];
   if (avatar == '') {
     avatar = defaultProfilePic;
@@ -13,7 +14,7 @@ AppBar taskAppBar(context, profileDetails) {
     backgroundColor: colorGreen,
     flexibleSpace: Container(
         alignment: Alignment.bottomCenter,
-        padding: const EdgeInsets.only(top: 40),
+        padding: EdgeInsets.only(top: width * 0.04),
         child: InkWell(
             onTap: () {
               Navigator.pushNamed(context, "/updateProfile");
@@ -23,7 +24,10 @@ AppBar taskAppBar(context, profileDetails) {
                   child: SizedBox(
                     width: 40,
                     height: 40,
-                    child: Image.memory(showimage64(avatar), fit: BoxFit.cover,),
+                    child: Image.memory(
+                      showimage64(avatar),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 title: Text(

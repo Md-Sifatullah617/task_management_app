@@ -22,7 +22,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   formOnSubmit() async {
-    Navigator.pushNamedAndRemoveUntil(context, "/mainPage", (route) => false);
     if (formValues["email"]!.isEmpty) {
       errorToast("Email Required !");
     } else if (formValues["password"]!.isEmpty) {

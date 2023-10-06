@@ -22,7 +22,6 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   }
 
   formOnSubmit() async {
-    Navigator.pushNamed(context, '/pinVerification');
     if (formValues["email"]!.isEmpty) {
       errorToast("Email Required !");
     } else {
