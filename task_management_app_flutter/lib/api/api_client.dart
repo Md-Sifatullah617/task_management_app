@@ -16,11 +16,11 @@ Future<bool> loginRequest(formValues) async {
   var resultCode = response.statusCode;
   var resultBody = json.decode(response.body);
   if (resultCode == 200 && resultBody['status'] == 'success') {
-    successToast("Request Success");
+    customToast("Request Success");
     await writeUserData(resultBody);
     return true;
   } else {
-    errorToast("Request fail! try again");
+    customToast(isError: true, "Request fail! try again");
     return false;
   }
 }
@@ -33,10 +33,10 @@ Future<bool> registrationRequest(formValues) async {
   var resultCode = response.statusCode;
   var resultBody = json.decode(response.body);
   if (resultCode == 200 && resultBody['status'] == 'success') {
-    successToast("Request Success");
+    customToast("Request Success");
     return true;
   } else {
-    errorToast("Request fail! try again");
+    customToast(isError: true, "Request fail! try again");
     return false;
   }
 }
@@ -49,10 +49,10 @@ Future<bool> verifyEmailRequest(email) async {
   var resultBody = json.decode(response.body);
   if (resultCode == 200 && resultBody['status'] == 'success') {
     await writeEmailVerification(email);
-    successToast("Request Success");
+    customToast("Request Success");
     return true;
   } else {
-    errorToast("Request fail! try again");
+    customToast(isError: true, "Request fail! try again");
     return false;
   }
 }
@@ -65,10 +65,10 @@ Future<bool> verifyOTPRequest(email, oTP) async {
   var resultBody = json.decode(response.body);
   if (resultCode == 200 && resultBody['status'] == 'success') {
     await writeOTPVerification(oTP);
-    successToast("Request Success");
+    customToast("Request Success");
     return true;
   } else {
-    errorToast("Request fail! try again");
+    customToast(isError: true, "Request fail! try again");
     return false;
   }
 }
@@ -80,10 +80,10 @@ Future<bool> setPwdRequest(formValues) async {
   var resultCode = response.statusCode;
   var resultBody = json.decode(response.body);
   if (resultCode == 200 && resultBody['status'] == 'success') {
-    successToast("Request Success");
+    customToast("Request Success");
     return true;
   } else {
-    errorToast("Request fail! try again");
+    customToast(isError: true, "Request fail! try again");
     return false;
   }
 }
@@ -104,14 +104,14 @@ Future<List> taskLIstRequest(status) async {
     var resultCode = response.statusCode;
     var resultBody = json.decode(response.body);
     if (resultCode == 200 && resultBody["status"] == "success") {
-      successToast("Request Success");
+      customToast("Request Success");
       return resultBody['data'];
     } else {
-      errorToast("Request fail ! try again");
+      customToast(isError: true, "Request fail ! try again");
       return [];
     }
   } catch (e) {
-    errorToast(e.toString());
+    customToast(isError: true, e.toString());
     return [];
   }
 }
@@ -126,14 +126,14 @@ Future<bool> taskCreateRequest(formValues) async {
     var resultCode = response.statusCode;
     var resultBody = json.decode(response.body);
     if (resultCode == 200 && resultBody['status'] == 'success') {
-      successToast("Request Success");
+      customToast("Request Success");
       return true;
     } else {
-      errorToast("Request fail ! try again");
+      customToast(isError: true, "Request fail ! try again");
       return false;
     }
   } catch (e) {
-    errorToast(e.toString());
+    customToast(isError: true, e.toString());
     return false;
   }
 }
@@ -146,14 +146,14 @@ Future<bool> deleteTaskRequest(id) async {
     var resultCode = response.statusCode;
     var resultBody = json.decode(response.body);
     if (resultCode == 200 && resultBody["status"] == "success") {
-      successToast("Request Success");
+      customToast("Request Success");
       return true;
     } else {
-      errorToast("Request fail ! try again");
+      customToast(isError: true, "Request fail ! try again");
       return false;
     }
   } catch (e) {
-    errorToast(e.toString());
+    customToast(isError: true, e.toString());
     return false;
   }
 }
@@ -166,14 +166,14 @@ Future<bool> updateTaskRequest(id, status) async {
     var resultCode = response.statusCode;
     var resultBody = json.decode(response.body);
     if (resultCode == 200 && resultBody["status"] == "success") {
-      successToast("Request Success");
+      customToast("Request Success");
       return true;
     } else {
-      errorToast("Request fail ! try again");
+      customToast(isError: true, "Request fail ! try again");
       return false;
     }
   } catch (e) {
-    errorToast(e.toString());
+    customToast(isError: true, e.toString());
     return false;
   }
 }
@@ -188,14 +188,14 @@ Future<bool> updateProfile(formValues) async {
     var resultCode = response.statusCode;
     var resultBody = json.decode(response.body);
     if (resultCode == 200 && resultBody['status'] == 'success') {
-      successToast("Request Updated");
+      customToast("Request Updated");
       return true;
     } else {
-      errorToast("Request fail ! try again");
+      customToast(isError: true, "Request fail ! try again");
       return false;
     }
   } catch (e) {
-    errorToast(e.toString());
+    customToast(isError: true, e.toString());
     return false;
   }
 }
@@ -208,14 +208,14 @@ Future<List> taskCountRequest() async {
     var resultCode = response.statusCode;
     var resultBody = json.decode(response.body);
     if (resultCode == 200 && resultBody["status"] == "success") {
-      successToast("Request Success");
+      customToast("Request Success");
       return resultBody['data'];
     } else {
-      errorToast("Request fail ! try again");
+      customToast(isError: true, "Request fail ! try again");
       return [];
     }
   } catch (e) {
-    errorToast(e.toString());
+    customToast(isError: true, e.toString());
     return [];
   }
 }

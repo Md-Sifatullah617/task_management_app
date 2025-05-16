@@ -29,17 +29,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   formOnSubmit() async {
     if (formValues["email"]!.isEmpty) {
-      errorToast("Email Required !");
+      customToast(isError: true, "Email Required !");
     } else if (formValues["firstName"]!.isEmpty) {
-      errorToast("First Name Required !");
+      customToast(isError: true, "First Name Required !");
     } else if (formValues["lastName"]!.isEmpty) {
-      errorToast("Last Name Required !");
+      customToast(isError: true, "Last Name Required !");
     } else if (formValues["mobile"]!.isEmpty) {
-      errorToast("Mobile Number Required !");
+      customToast(isError: true, "Mobile Number Required !");
     } else if (formValues["password"]!.isEmpty) {
-      errorToast("Password Required !");
+      customToast(isError: true, "Password Required !");
     } else if (formValues["cpassword"] != formValues["password"]) {
-      errorToast("Confirm Password Should Be Same !");
+      customToast(isError: true, "Confirm Password Should Be Same !");
     } else {
       setState(() {
         loading = true;

@@ -126,24 +126,13 @@ Ink successButtonChild(String ButtonText) {
   );
 }
 
-void successToast(msg) {
+void customToast(String msg, {bool? isError = false}) {
   Fluttertoast.showToast(
       msg: msg,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
       toastLength: Toast.LENGTH_SHORT,
-      backgroundColor: colorGreen,
-      textColor: colorWhite,
-      fontSize: 16);
-}
-
-void errorToast(msg) {
-  Fluttertoast.showToast(
-      msg: msg,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
-      toastLength: Toast.LENGTH_SHORT,
-      backgroundColor: colorRed,
+      backgroundColor: isError == true ? colorRed : colorGreen,
       textColor: colorWhite,
       fontSize: 16);
 }
@@ -189,7 +178,7 @@ Container statusChild(statusText, statusColor) {
 showimage64(base64String) {
   UriData? data = Uri.parse(base64String).data;
   Uint8List image;
-  if(data != null) {
+  if (data != null) {
     image = data.contentAsBytes();
   } else {
     image = base64Decode(base64String);
@@ -197,7 +186,7 @@ showimage64(base64String) {
   return image;
 }
 
-statuscount(status,statusnumber){
+statuscount(String status,int statusnumber) {
   return Expanded(
     child: Card(
       elevation: 0,
@@ -206,10 +195,11 @@ statuscount(status,statusnumber){
         child: Column(
           children: [
             FittedBox(
-              child: Text(statusnumber,style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold
-              ),),
+              child: Text(
+                statusnumber.toString(),
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
             ),
             FittedBox(child: Text(status))
           ],

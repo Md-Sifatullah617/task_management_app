@@ -23,7 +23,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
 
   formOnSubmit() async {
     if (formValues["email"]!.isEmpty) {
-      errorToast("Email Required !");
+      customToast(isError: true, "Email Required !");
     } else {
       setState(() {
         loading = true;

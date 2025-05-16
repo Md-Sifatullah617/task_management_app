@@ -1,0 +1,93 @@
+{
+  "actions": [
+    {
+      "type": "deleteTable",
+      "deleteTable": "task"
+    },
+    {
+      "type": "createTable",
+      "createTable": {
+        "name": "task",
+        "dartName": "Task",
+        "module": "task_management_app",
+        "schema": "public",
+        "columns": [
+          {
+            "name": "id",
+            "columnType": 6,
+            "isNullable": false,
+            "columnDefault": "nextval('task_id_seq'::regclass)",
+            "dartType": "int?"
+          },
+          {
+            "name": "title",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "description",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "status",
+            "columnType": 6,
+            "isNullable": false,
+            "dartType": "protocol:TaskStatus"
+          },
+          {
+            "name": "createdAt",
+            "columnType": 4,
+            "isNullable": false,
+            "dartType": "DateTime"
+          },
+          {
+            "name": "updatedAt",
+            "columnType": 4,
+            "isNullable": false,
+            "dartType": "DateTime"
+          }
+        ],
+        "foreignKeys": [],
+        "indexes": [
+          {
+            "indexName": "task_pkey",
+            "elements": [
+              {
+                "type": 0,
+                "definition": "id"
+              }
+            ],
+            "type": "btree",
+            "isUnique": true,
+            "isPrimary": true
+          }
+        ],
+        "managed": true
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "type": "columnDropped",
+      "message": "Column \"name\" of table \"task\" will be dropped.",
+      "table": "task",
+      "columns": [
+        "name"
+      ],
+      "destrucive": true
+    },
+    {
+      "type": "tableDropped",
+      "message": "One or more columns are added to table \"task\" which cannot be added in a table migration. The complete table will be deleted and recreated.",
+      "table": "task",
+      "columns": [
+        "title"
+      ],
+      "destrucive": true
+    }
+  ],
+  "migrationApiVersion": 1
+}

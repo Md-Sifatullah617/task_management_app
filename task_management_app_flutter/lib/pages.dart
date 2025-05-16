@@ -1,0 +1,9 @@
+export 'view/onboarding/email_verification_screen.dart';
+export 'view/onboarding/login_screen.dart';
+export 'view/onboarding/pin_verification_screen.dart';
+export 'view/onboarding/registration_screen.dart';
+export 'view/onboarding/set_password_screen.dart';
+export 'view/onboarding/splash_screen.dart';
+export 'view/profile/profile_update_screen.dart';
+export 'view/task/homepage_screen.dart';
+export 'view/task/task_create_screen.dart';

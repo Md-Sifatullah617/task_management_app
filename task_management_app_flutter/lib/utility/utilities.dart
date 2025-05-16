@@ -30,7 +30,7 @@ Future<void> writePassword(storepassword) async {
 
 Future<String?> readUserData(key) async {
   final prefs = await SharedPreferences.getInstance();
-  String? mydata = await prefs.getString(key);
+  String? mydata = prefs.getString(key);
   return mydata;
 }
 

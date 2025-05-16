@@ -1,0 +1,8 @@
+class: Task
+table: task
+fields:
+  title: String
+  description: String
+  status: TaskStatus
+  createdAt: DateTime
+  updatedAt: DateTime

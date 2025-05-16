@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:task_management_app_client/task_management_app_client.dart';
 import '../style/style.dart';
 
-ListView taskList(taskItems, deleteItems, statusChange) {
+ListView taskList(List<Task> taskItems, deleteItems, statusChange) {
   return ListView.builder(
       itemCount: taskItems.length,
       itemBuilder: (context, index) {

@@ -41,9 +41,9 @@ class _SetPwdScreenState extends State<SetPwdScreen> {
 
   formOnSubmit() async {
     if (formValues['password']!.isEmpty) {
-      errorToast("OTP Required (6 digit) !");
+      customToast(isError: true, "OTP Required (6 digit) !");
     } else if (formValues['cpassword'] != formValues['password']) {
-      errorToast('Password should be same !');
+      customToast(isError: true, 'Password should be same !');
     } else {
       setState(() {
         loading = true;

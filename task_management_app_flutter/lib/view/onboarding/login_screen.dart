@@ -23,9 +23,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   formOnSubmit() async {
     if (formValues["email"]!.isEmpty) {
-      errorToast("Email Required !");
+      customToast(isError: true, "Email Required !");
     } else if (formValues["password"]!.isEmpty) {
-      errorToast("Password Required !");
+      customToast(isError: true, "Password Required !");
     } else {
       setState(() {
         loading = true;

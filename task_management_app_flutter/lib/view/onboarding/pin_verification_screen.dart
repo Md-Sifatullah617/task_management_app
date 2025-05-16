@@ -24,7 +24,7 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
 
   formOnSubmit() async {
     if (formValues['OTP']!.length != 6) {
-      errorToast("OTP Required (6 digit) !");
+      customToast(isError: true, "OTP Required (6 digit) !");
     } else {
       setState(() {
         loading = true;
