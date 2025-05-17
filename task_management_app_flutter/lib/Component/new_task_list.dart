@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:task_management_app_flutter/controller/task_controller.dart';
 
@@ -6,7 +7,7 @@ import '../style/style.dart';
 import 'tast_list.dart';
 
 class NewTaskList extends StatelessWidget {
-   NewTaskList({super.key});
+  NewTaskList({super.key});
 
   final TaskController taskController = Get.find<TaskController>();
 
@@ -15,7 +16,9 @@ class NewTaskList extends StatelessWidget {
     return Obx(
       () => taskController.loading.value
           ? const Center(
-              child: CircularProgressIndicator(),
+              child: SpinKitSpinningLines(
+                color: colorGreen,
+              ),
             )
           : RefreshIndicator(
               onRefresh: () async {

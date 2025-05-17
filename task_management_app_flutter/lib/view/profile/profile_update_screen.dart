@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../api/api_client.dart';
@@ -125,7 +126,10 @@ class _ProfileUpdateScreenState extends State<ProfileUpdateScreen> {
               margin: const EdgeInsets.fromLTRB(0, 60, 0, 0),
               padding: const EdgeInsets.all(30.0),
               child: loading
-                  ? const Center(child: (CircularProgressIndicator()))
+                  ? const Center(
+                      child: (SpinKitSpinningLines(
+                      color: colorGreen,
+                    )))
                   : (Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,

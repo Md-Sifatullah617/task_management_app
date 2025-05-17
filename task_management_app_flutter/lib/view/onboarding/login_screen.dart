@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../api/api_client.dart';
 import '../../style/style.dart';
@@ -54,7 +55,10 @@ class _LoginScreenState extends State<LoginScreen> {
           Container(
             alignment: Alignment.center,
             child: loading
-                ? (const Center(child: (CircularProgressIndicator())))
+                ? (const Center(
+                    child: (SpinKitSpinningLines(
+                    color: colorGreen,
+                  ))))
                 : (SingleChildScrollView(
                     child: Container(
                       alignment: Alignment.center,

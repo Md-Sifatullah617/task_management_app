@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:task_management_app_flutter/controller/task_controller.dart';
+import 'package:task_management_app_flutter/style/style.dart';
 
 import 'tast_list.dart';
 
@@ -14,7 +16,9 @@ class CancelTaskList extends StatelessWidget {
     return Obx(
       () => taskController.loading.value
           ? const Center(
-              child: CircularProgressIndicator(),
+              child: SpinKitSpinningLines(
+                color: colorGreen,
+              ),
             )
           : RefreshIndicator(
               onRefresh: () async {

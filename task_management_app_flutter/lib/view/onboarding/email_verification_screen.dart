@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../api/api_client.dart';
 import '../../style/style.dart';
@@ -48,7 +49,10 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
           Padding(
             padding: const EdgeInsets.all(30.0),
             child: loading
-                ? const Center(child: CircularProgressIndicator())
+                ? const Center(
+                    child: SpinKitSpinningLines(
+                    color: colorGreen,
+                  ))
                 : Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,

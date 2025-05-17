@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:task_management_app_flutter/controller/task_controller.dart';
 
@@ -15,64 +16,69 @@ class TaskCreateScreen extends StatelessWidget {
       appBar: AppBar(
           backgroundColor: colorGreen, title: const Text("Create New Task")),
       body: SingleChildScrollView(
-        child: Stack(alignment: Alignment.topCenter, children: [
+        child: Stack(children: [
           screenBackground(
             context,
           ),
-          Obx(
-            () => taskController.loading.value
-                ? const Center(child: CircularProgressIndicator())
-                : Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Add New Task",
-                          style: head1Text(colorDarkBlue),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: taskController.titleController,
-                          decoration: appInputDecoration("Task Name"),
-                          onChanged: (textValue) {
-                            debugPrint("Text Value: $textValue");
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: taskController.descriptionController,
-                          decoration: appInputDecoration("Description"),
-                          maxLines: 10,
-                          onChanged: (textValue) {
-                            debugPrint("Text Value: $textValue");
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        ElevatedButton(
-                            onPressed: () {
-                              if (taskController.titleController.text.isEmpty) {
-                                customToast(isError: true, "Title Required !");
-                              } else if (taskController
-                                  .descriptionController.text.isEmpty) {
-                                customToast(
-                                    isError: true, "Description Required !");
-                              } else {
-                                taskController.createTask();
-                              }
+          Positioned.fill(
+            child: Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: Obx(
+                () => taskController.loading.value
+                    ? const Center(
+                        child: SpinKitSpinningLines(
+                        color: colorGreen,
+                      ))
+                    : Column(
+                        children: [
+                          Text(
+                            "Add New Task",
+                            style: head1Text(colorDarkBlue),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            controller: taskController.titleController,
+                            decoration: appInputDecoration("Task Name"),
+                            onChanged: (textValue) {
+                              debugPrint("Text Value: $textValue");
                             },
-                            style: appButtonStyle(),
-                            child: successButtonChild("Create"))
-                      ],
-                    ),
-                  ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            controller: taskController.descriptionController,
+                            decoration: appInputDecoration("Description"),
+                            maxLines: 10,
+                            onChanged: (textValue) {
+                              debugPrint("Text Value: $textValue");
+                            },
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton(
+                              onPressed: () {
+                                if (taskController
+                                    .titleController.text.isEmpty) {
+                                  customToast(
+                                      isError: true, "Title Required !");
+                                } else if (taskController
+                                    .descriptionController.text.isEmpty) {
+                                  customToast(
+                                      isError: true, "Description Required !");
+                                } else {
+                                  taskController.createTask();
+                                }
+                              },
+                              style: appButtonStyle(),
+                              child: successButtonChild("Create"))
+                        ],
+                      ),
+              ),
+            ),
           )
         ]),
       ),
