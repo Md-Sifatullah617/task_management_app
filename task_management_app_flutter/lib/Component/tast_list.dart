@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:task_management_app_client/task_management_app_client.dart';
 import 'package:task_management_app_flutter/controller/task_controller.dart';
@@ -97,12 +96,13 @@ taskList(
           statusColor = colorRed;
         }
 
-        return Card(
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-          child: GestureDetector(
-            onTap: () {
-              Get.toNamed(AppRoutes.taskCreate);
-            },
+        return GestureDetector(
+          onTap: () {
+            Get.toNamed(AppRoutes.taskCreate, arguments: {"update": true});
+            controller.selectedTask.value = taskItems[index];
+          },
+          child: Card(
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(10),
@@ -137,6 +137,8 @@ taskList(
                               child: ElevatedButton(
                                 onPressed: () {
                                   statusChange(taskItems[index].id);
+                                  controller.selectedStatus.value =
+                                      taskItems[index].status;
                                 },
                                 style: tinyButtonStyle(colorBlue),
                                 child: const Icon(

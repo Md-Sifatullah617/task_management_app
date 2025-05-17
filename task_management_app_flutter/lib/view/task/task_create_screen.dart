@@ -12,6 +12,16 @@ class TaskCreateScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool needUpdate =
+        (Get.arguments != null && Get.arguments["update"] != null)
+            ? Get.arguments["update"]
+            : false;
+    if (taskController.selectedTask.value != null) {
+      taskController.titleController.text =
+          taskController.selectedTask.value!.title;
+      taskController.descriptionController.text =
+          taskController.selectedTask.value!.description;
+    }
     return Scaffold(
       appBar: AppBar(
           backgroundColor: colorGreen, title: const Text("Create New Task")),
@@ -70,11 +80,14 @@ class TaskCreateScreen extends StatelessWidget {
                                   customToast(
                                       isError: true, "Description Required !");
                                 } else {
-                                  taskController.createTask();
+                                  needUpdate
+                                      ? taskController.updateTask()
+                                      : taskController.createTask();
                                 }
                               },
                               style: appButtonStyle(),
-                              child: successButtonChild("Create"))
+                              child: successButtonChild(
+                                  needUpdate ? "Update" : "Create"))
                         ],
                       ),
               ),

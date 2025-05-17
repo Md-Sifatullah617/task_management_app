@@ -14,6 +14,8 @@ class TaskController extends GetxController {
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   Rx<TaskStatus> status = TaskStatus.New.obs;
+  Rx<TaskStatus> selectedStatus = TaskStatus.New.obs;
+  Rxn<Task> selectedTask = Rxn<Task>();
 
   @override
   void onInit() {
@@ -63,11 +65,11 @@ class TaskController extends GetxController {
     }
   }
 
-  Future<void> updateTask(int id) async {
+  Future<void> updateTask() async {
     try {
       loading.value = true;
       await client.task.updateTask(
-        id,
+        selectedTask.value!.id!,
         titleController.text,
         descriptionController.text,
       );

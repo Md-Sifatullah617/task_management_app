@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: AppRoutes.mainPage,
+        initialRoute: AppRoutes.splash,
         getPages: AppRoutes.pages,
       ),
     );
