@@ -83,7 +83,16 @@ class TaskController extends GetxController {
       loading.value = true;
       await client.task.deleteTask(id);
       customToast("Task Deleted Successfully!");
-      
+      // delete task from the list based on the status
+      if (status.value == TaskStatus.New) {
+        newTaskItems.removeWhere((task) => task.id == id);
+      } else if (status.value == TaskStatus.Progress) {
+        progressTaskItems.removeWhere((task) => task.id == id);
+      } else if (status.value == TaskStatus.Completed) {
+        completeTaskItems.removeWhere((task) => task.id == id);
+      } else if (status.value == TaskStatus.Canceled) {
+        cancelTaskItems.removeWhere((task) => task.id == id);
+      }
     } catch (e) {
       // Handle error
       debugPrint("Error deleting task: $e");
