@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:task_management_app_flutter/routes.dart';
 
+import '../main.dart';
 import '../style/style.dart';
 import '../utility/utilities.dart';
 
@@ -45,9 +48,11 @@ AppBar taskAppBar(context, profileDetails) {
           icon: const Icon(Icons.add_circle_outline)),
       IconButton(
           onPressed: () async {
-            await removeToken();
-            Navigator.pushNamedAndRemoveUntil(
-                context, "/login", (route) => false);
+            await sessionManager.signOutDevice().then((value) async {
+              debugPrint("Sign out device: $value");
+              await removeToken();
+              Get.offAllNamed(AppRoutes.login);
+            });
           },
           icon: const Icon(Icons.exit_to_app))
     ],
