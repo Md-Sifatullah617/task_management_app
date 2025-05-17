@@ -112,6 +112,36 @@ class Endpoints extends _i1.EndpointDispatch {
             params['status'],
           ),
         ),
+        'updateTask': _i1.MethodConnector(
+          name: 'updateTask',
+          params: {
+            'id': _i1.ParameterDescription(
+              name: 'id',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+            'title': _i1.ParameterDescription(
+              name: 'title',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+            'description': _i1.ParameterDescription(
+              name: 'description',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['task'] as _i2.TaskEndpoint).updateTask(
+            session,
+            params['id'],
+            params['title'],
+            params['description'],
+          ),
+        ),
       },
     );
     connectors['greeting'] = _i1.EndpointConnector(

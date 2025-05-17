@@ -63,6 +63,21 @@ class EndpointTask extends _i1.EndpointRef {
           'status': status,
         },
       );
+
+  _i2.Future<void> updateTask(
+    int id,
+    String title,
+    String description,
+  ) =>
+      caller.callServerEndpoint<void>(
+        'task',
+        'updateTask',
+        {
+          'id': id,
+          'title': title,
+          'description': description,
+        },
+      );
 }
 
 /// This is an example endpoint that returns a greeting message through its [hello] method.

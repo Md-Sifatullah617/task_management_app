@@ -35,9 +35,9 @@ class TaskController extends GetxController {
       cancelTaskItems.value =
           taskList.where((task) => task.status == TaskStatus.Canceled).toList();
       debugPrint("Tasks loaded successfully with ${taskList.length} items.");
-    } catch (e) {
+    } on ServerpodClientException catch (e) {
       // Handle error
-      debugPrint("Error loading tasks: $e");
+      debugPrint("Error loading tasks: ${e.message}");
     } finally {
       loading.value = false;
     }
@@ -52,9 +52,30 @@ class TaskController extends GetxController {
       );
       customToast("Task Added Successfully!");
       loadTasks();
-    } catch (e) {
+    } on ServerpodClientException catch (e) {
       // Handle error
-      debugPrint("Error creating task: $e");
+      debugPrint("Error creating task: ${e.message}");
+    } finally {
+      Get.back();
+      loading.value = false;
+      titleController.clear();
+      descriptionController.clear();
+    }
+  }
+
+  Future<void> updateTask(int id) async {
+    try {
+      loading.value = true;
+      await client.task.updateTask(
+        id,
+        titleController.text,
+        descriptionController.text,
+      );
+      customToast("Task Updated Successfully!");
+      loadTasks();
+    } on ServerpodClientException catch (e) {
+      // Handle error
+      debugPrint("Error updating task: ${e.message}");
     } finally {
       Get.back();
       loading.value = false;
@@ -69,9 +90,9 @@ class TaskController extends GetxController {
       await client.task.updateTaskStatus(id, status.value);
       customToast("Task Status Updated Successfully!");
       loadTasks();
-    } catch (e) {
+    } on ServerpodClientException catch (e) {
       // Handle error
-      debugPrint("Error updating task status: $e");
+      debugPrint("Error updating task status: ${e.message}");
     } finally {
       Get.back();
       loading.value = false;
@@ -83,19 +104,10 @@ class TaskController extends GetxController {
       loading.value = true;
       await client.task.deleteTask(id);
       customToast("Task Deleted Successfully!");
-      // delete task from the list based on the status
-      if (status.value == TaskStatus.New) {
-        newTaskItems.removeWhere((task) => task.id == id);
-      } else if (status.value == TaskStatus.Progress) {
-        progressTaskItems.removeWhere((task) => task.id == id);
-      } else if (status.value == TaskStatus.Completed) {
-        completeTaskItems.removeWhere((task) => task.id == id);
-      } else if (status.value == TaskStatus.Canceled) {
-        cancelTaskItems.removeWhere((task) => task.id == id);
-      }
-    } catch (e) {
+      loadTasks();
+    } on ServerpodClientException catch (e) {
       // Handle error
-      debugPrint("Error deleting task: $e");
+      debugPrint("Error deleting task: ${e.message}");
     } finally {
       Get.back();
       loading.value = false;

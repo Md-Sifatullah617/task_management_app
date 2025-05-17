@@ -3,5 +3,6 @@ task:
   - deleteTask:
   - getAllTask:
   - updateTaskStatus:
+  - updateTask:
 greeting:
   - hello:

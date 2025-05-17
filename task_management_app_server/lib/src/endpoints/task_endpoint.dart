@@ -54,4 +54,19 @@ class TaskEndpoint extends Endpoint {
       await Task.db.updateRow(session, task);
     }
   }
+
+  // Update tasks in the database based on their id
+  Future<void> updateTask(
+      Session session, int id, String title, String description) async {
+    // Find the task by its ID
+    Task? task = await Task.db.findById(session, id);
+
+    // If the task is found, update its title and description
+    if (task != null) {
+      task.title = title;
+      task.description = description;
+      task.updatedAt = DateTime.now();
+      await Task.db.updateRow(session, task);
+    }
+  }
 }

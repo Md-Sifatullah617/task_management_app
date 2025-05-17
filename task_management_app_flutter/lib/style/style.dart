@@ -152,14 +152,6 @@ PinTheme appOTPStyle() {
       activeFillColor: colorWhite);
 }
 
-Container containerCard(child) {
-  return Container(
-    width: double.infinity,
-    padding: const EdgeInsets.all(10),
-    child: child,
-  );
-}
-
 Container statusChild(statusText, statusColor) {
   return Container(
     alignment: Alignment.center,
@@ -186,7 +178,7 @@ showimage64(base64String) {
   return image;
 }
 
-statuscount(String status,int statusnumber) {
+statuscount(String status, int statusnumber) {
   return Expanded(
     child: Card(
       elevation: 0,

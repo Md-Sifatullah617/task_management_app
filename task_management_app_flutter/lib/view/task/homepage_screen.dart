@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_management_app_client/task_management_app_client.dart';
 import 'package:task_management_app_flutter/controller/task_controller.dart';
 
 import '../../Component/bottom_app_bar.dart';
@@ -19,7 +18,6 @@ class MyHomePage extends StatelessWidget {
 
   onTappedIndexChange(int index) {
     bottomNavIndex.value = index;
-    taskController.status.value = TaskStatus.values[index];
   }
 
   final widgetOptions = [
