@@ -1,18 +1,88 @@
 import 'package:flutter/material.dart';
 import 'package:task_management_app_client/task_management_app_client.dart';
+import 'package:task_management_app_flutter/controller/task_controller.dart';
+
 import '../style/style.dart';
 
-ListView taskList(List<Task> taskItems, deleteItems, statusChange) {
+ListView taskList(
+    BuildContext context, TaskController controller, List<Task> taskItems) {
+  deleteItems(id) async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Delete"),
+            content: const Text("Once delete, you can't get it back"),
+            actions: [
+              OutlinedButton(
+                  onPressed: () async {
+                    controller.deleteTask(id);
+                  },
+                  child: const Text("Yes")),
+              OutlinedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("No")),
+            ],
+          );
+        });
+  }
+
+  statusChange(id) async {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(builder: (constext, StateSetter setState) {
+            return Container(
+              padding: const EdgeInsets.all(30),
+              height: 350,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ...List.generate(TaskStatus.values.length, (index) {
+                    return RadioListTile(
+                      title: Text(TaskStatus.values[index].name),
+                      value: TaskStatus.values[index],
+                      groupValue: controller.status.value,
+                      onChanged: (value) {
+                        controller.status.value = value!;
+                      },
+                    );
+                  }),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                      onPressed: () async {
+                        Navigator.pop(context);
+                        controller.updateStatusById(id);
+                      },
+                      style: appButtonStyle(),
+                      child: successButtonChild("Confirm"))
+                ],
+              ),
+            );
+          });
+        });
+  }
+
   return ListView.builder(
       itemCount: taskItems.length,
       itemBuilder: (context, index) {
         Color statusColor = colorGreen;
-        if (taskItems[index]['status'] == "New") {
+        if (taskItems[index].status == TaskStatus.New) {
           statusColor = colorBlue;
-        } else if (taskItems[index]['status'] == "Progress") {
+        } else if (taskItems[index].status == TaskStatus.Progress) {
           statusColor = colorOrange;
-        } else if (taskItems[index]['status'] == "Canceled") {
+        } else if (taskItems[index].status == TaskStatus.Canceled) {
           statusColor = colorRed;
+        }
+
+        if (taskItems.isEmpty) {
+          return Center(
+            child: Text("No ${controller.status.value} Task Found"),
+          );
         }
         return Card(
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -21,15 +91,15 @@ ListView taskList(List<Task> taskItems, deleteItems, statusChange) {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                taskItems[index]['title'],
+                taskItems[index].title,
                 style: head1Text(colorDarkBlue),
               ),
               Text(
-                taskItems[index]['description'],
+                taskItems[index].description,
                 style: head7Text(colorLightGray),
               ),
               Text(
-                taskItems[index]['createdDate'],
+                taskItems[index].createdAt.toString(),
                 style: head9Text(colorDarkBlue),
               ),
               const SizedBox(
@@ -38,7 +108,7 @@ ListView taskList(List<Task> taskItems, deleteItems, statusChange) {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  statusChild(taskItems[index]['status'], statusColor),
+                  statusChild(taskItems[index].status.name, statusColor),
                   Row(
                     children: [
                       SizedBox(
@@ -46,7 +116,7 @@ ListView taskList(List<Task> taskItems, deleteItems, statusChange) {
                         height: 30,
                         child: ElevatedButton(
                           onPressed: () {
-                            statusChange(taskItems[index]['_id']);
+                            statusChange(taskItems[index].id);
                           },
                           style: tinyButtonStyle(colorBlue),
                           child: const Icon(
@@ -63,7 +133,7 @@ ListView taskList(List<Task> taskItems, deleteItems, statusChange) {
                         height: 30,
                         child: ElevatedButton(
                           onPressed: () {
-                            deleteItems(taskItems[index]['_id']);
+                            deleteItems(taskItems[index].id);
                           },
                           style: tinyButtonStyle(colorRed),
                           child: const Icon(

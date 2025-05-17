@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:task_management_app_client/task_management_app_client.dart';
 
 import '../style/style.dart';
 
 BottomNavigationBar appBottomNav(currentIndx, onTappedIndexChange) {
+  List<IconData> icons = [
+    Icons.list_alt_outlined,
+    Icons.leaderboard_outlined,
+    Icons.check_circle_outline,
+    Icons.update_disabled_outlined
+  ];
   return BottomNavigationBar(
-    items: const [
-      BottomNavigationBarItem(icon: Icon(Icons.list_alt_outlined), label: "New"),
-      BottomNavigationBarItem(icon: Icon(Icons.leaderboard_outlined), label: "Progress"),
-      BottomNavigationBarItem(icon: Icon(Icons.check_circle_outline), label: "Completed"),
-      BottomNavigationBarItem(icon: Icon(Icons.update_disabled_outlined), label: "Cancled"),
-    ],
-    selectedItemColor: colorGreen,
-    unselectedItemColor: colorLightGray,
-    currentIndex: currentIndx,
-    showSelectedLabels: true,
-    showUnselectedLabels: true,
-    onTap: onTappedIndexChange
-  );
+      items: TaskStatus.values
+          .map((status) => BottomNavigationBarItem(
+              icon: Icon(
+                icons[TaskStatus.values.indexOf(status)],
+              ),
+              label: status.name))
+          .toList(),
+      selectedItemColor: colorGreen,
+      unselectedItemColor: colorLightGray,
+      currentIndex: currentIndx,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      onTap: onTappedIndexChange);
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_management_app_flutter/controller/task_controller.dart';
 
-import '../api/api_client.dart';
 import '../style/style.dart';
 import 'tast_list.dart';
 
@@ -62,34 +61,6 @@ class _NewTaskListState extends State<NewTaskList> {
   //   });
   // }
 
-  // deleteItems(id) async {
-  //   showDialog(
-  //       context: context,
-  //       builder: (context) {
-  //         return AlertDialog(
-  //           title: const Text("Delete"),
-  //           content: const Text("Once delete, you can't get it back"),
-  //           actions: [
-  //             OutlinedButton(
-  //                 onPressed: () async {
-  //                   Navigator.pop(context);
-  //                   setState(() {
-  //                     loading = true;
-  //                   });
-  //                   await deleteTaskRequest(id);
-  //                   await callData();
-  //                 },
-  //                 child: const Text("Yes")),
-  //             OutlinedButton(
-  //                 onPressed: () {
-  //                   Navigator.pop(context);
-  //                 },
-  //                 child: const Text("No")),
-  //           ],
-  //         );
-  //       });
-  // }
-
   // String status = 'New';
   // updateStatus(id) async {
   //   setState(() {
@@ -100,70 +71,6 @@ class _NewTaskListState extends State<NewTaskList> {
   //   setState(() {
   //     status = "New";
   //   });
-  // }
-
-  // statusChange(id) async {
-  //   showModalBottomSheet(
-  //       context: context,
-  //       builder: (context) {
-  //         return StatefulBuilder(builder: (constext, StateSetter setState) {
-  //           return Container(
-  //             padding: const EdgeInsets.all(30),
-  //             height: 350,
-  //             child: Column(
-  //               mainAxisAlignment: MainAxisAlignment.start,
-  //               children: [
-  //                 RadioListTile(
-  //                     title: const Text("New"),
-  //                     value: "New",
-  //                     groupValue: status,
-  //                     onChanged: (value) {
-  //                       setState(() {
-  //                         status = value.toString();
-  //                       });
-  //                     }),
-  //                 RadioListTile(
-  //                     title: const Text("Progress"),
-  //                     value: "Progress",
-  //                     groupValue: status,
-  //                     onChanged: (value) {
-  //                       setState(() {
-  //                         status = value.toString();
-  //                       });
-  //                     }),
-  //                 RadioListTile(
-  //                     title: const Text("Completed"),
-  //                     value: "Completed",
-  //                     groupValue: status,
-  //                     onChanged: (value) {
-  //                       setState(() {
-  //                         status = value.toString();
-  //                       });
-  //                     }),
-  //                 RadioListTile(
-  //                     title: const Text("Canceled"),
-  //                     value: "Canceled",
-  //                     groupValue: status,
-  //                     onChanged: (value) {
-  //                       setState(() {
-  //                         status = value.toString();
-  //                       });
-  //                     }),
-  //                 const SizedBox(
-  //                   height: 10,
-  //                 ),
-  //                 ElevatedButton(
-  //                     onPressed: () async {
-  //                       Navigator.pop(context);
-  //                       updateStatus(id);
-  //                     },
-  //                     style: appButtonStyle(),
-  //                     child: successButtonChild("Confirm"))
-  //               ],
-  //             ),
-  //           );
-  //         });
-  //       });
   // }
 
   @override
@@ -181,14 +88,21 @@ class _NewTaskListState extends State<NewTaskList> {
                 children: [
                   Row(
                     children: [
-                      statuscount("New", taskController.newTaskCount.value),
-                      statuscount("Progress", taskController.progressTaskCount.value),
-                      statuscount("Completed", taskController.completeTaskCount.value),
-                      statuscount("Canceled", taskController.cancelTaskCount.value),
+                      statuscount("New", taskController.newTaskItems.length),
+                      statuscount(
+                          "Progress", taskController.progressTaskItems.length),
+                      statuscount(
+                          "Completed", taskController.completeTaskItems.length),
+                      statuscount(
+                          "Canceled", taskController.cancelTaskItems.length),
                     ],
                   ),
                   Expanded(
-                      child: taskList(taskController.taskItems, deleteItems, statusChange)),
+                      child: taskList(
+                    context,
+                    taskController,
+                    taskController.newTaskItems,
+                  )),
                 ],
               )),
     );

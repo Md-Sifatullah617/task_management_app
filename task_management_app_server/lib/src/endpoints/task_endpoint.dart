@@ -22,17 +22,36 @@ class TaskEndpoint extends Endpoint {
   }
 
   // Delete tasks from the database
-  Future<void> deleteTask(Session session, Task note) async {
-    await Task.db.deleteRow(session, note);
+  Future<void> deleteTask(Session session, int id) async {
+    // Find the task by its ID
+    Task? task = await Task.db.findById(session, id);
+    // If the task is found, delete it
+    if (task != null) {
+      await Task.db.deleteRow(session, task);
+    }
   }
 
   // Fetch tasks from the database
   Future<List<Task>> getAllTask(Session session) async {
-    // By ordering by the id column, we always get the notes in the same order
+    // By ordering by the id column, we always get task notes in the same order
     // and not in the order they were updated.
     return await Task.db.find(
       session,
       orderBy: (t) => t.id,
     );
+  }
+
+  // Update tasks in the database based on their id and status
+  Future<void> updateTaskStatus(
+      Session session, int id, TaskStatus status) async {
+    // Find the task by its ID
+    Task? task = await Task.db.findById(session, id);
+
+    // If the task is found, update its status
+    if (task != null) {
+      task.status = status;
+      task.updatedAt = DateTime.now();
+      await Task.db.updateRow(session, task);
+    }
   }
 }

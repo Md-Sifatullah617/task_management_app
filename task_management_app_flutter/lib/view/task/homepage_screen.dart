@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:task_management_app_client/task_management_app_client.dart';
+import 'package:task_management_app_flutter/controller/task_controller.dart';
 
 import '../../Component/bottom_app_bar.dart';
 import '../../Component/cancle_task_list.dart';
@@ -15,9 +18,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final TaskController taskController = Get.find<TaskController>();
   ValueNotifier<int> bottomNavIndex = ValueNotifier(0);
   onTappedIndexChange(int index) {
     bottomNavIndex.value = index;
+    taskController.status.value = TaskStatus.values[index];
   }
 
   final widgetOptions = [

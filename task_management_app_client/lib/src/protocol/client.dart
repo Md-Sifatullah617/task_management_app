@@ -12,8 +12,10 @@
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
 import 'package:task_management_app_client/src/protocol/task.dart' as _i3;
-import 'package:task_management_app_client/src/protocol/greeting.dart' as _i4;
-import 'protocol.dart' as _i5;
+import 'package:task_management_app_client/src/protocol/task_status.dart'
+    as _i4;
+import 'package:task_management_app_client/src/protocol/greeting.dart' as _i5;
+import 'protocol.dart' as _i6;
 
 /// {@category Endpoint}
 class EndpointTask extends _i1.EndpointRef {
@@ -35,10 +37,10 @@ class EndpointTask extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<void> deleteTask(_i3.Task note) => caller.callServerEndpoint<void>(
+  _i2.Future<void> deleteTask(int id) => caller.callServerEndpoint<void>(
         'task',
         'deleteTask',
-        {'note': note},
+        {'id': id},
       );
 
   _i2.Future<List<_i3.Task>> getAllTask() =>
@@ -46,6 +48,19 @@ class EndpointTask extends _i1.EndpointRef {
         'task',
         'getAllTask',
         {},
+      );
+
+  _i2.Future<void> updateTaskStatus(
+    int id,
+    _i4.TaskStatus status,
+  ) =>
+      caller.callServerEndpoint<void>(
+        'task',
+        'updateTaskStatus',
+        {
+          'id': id,
+          'status': status,
+        },
       );
 }
 
@@ -58,8 +73,8 @@ class EndpointGreeting extends _i1.EndpointRef {
   String get name => 'greeting';
 
   /// Returns a personalized greeting message: "Hello {name}".
-  _i2.Future<_i4.Greeting> hello(String name) =>
-      caller.callServerEndpoint<_i4.Greeting>(
+  _i2.Future<_i5.Greeting> hello(String name) =>
+      caller.callServerEndpoint<_i5.Greeting>(
         'greeting',
         'hello',
         {'name': name},
@@ -82,7 +97,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i5.Protocol(),
+          _i6.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
