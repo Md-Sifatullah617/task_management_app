@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:task_management_app_flutter/main.dart';
 
+import '../../routes.dart';
 import '../../style/style.dart';
-import '../../utility/utilities.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,24 +15,22 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  Future<void> checkToken() async {
-    final bool result = await checkLogin();
-    if (result) {
-      Timer(const Duration(seconds: 2), () {
-        Navigator.pushNamedAndRemoveUntil(
-            context, '/mainPage', (route) => false);
-      });
-    } else {
-      Timer(const Duration(seconds: 2), () {
-        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
-      });
-    }
-  }
-
   @override
   initState() {
     super.initState();
     checkToken();
+  }
+
+  Future<void> checkToken() async {
+    final bool result = sessionManager.isSignedIn;
+
+    Timer(const Duration(seconds: 2), () {
+      if (result) {
+        Get.offAllNamed(AppRoutes.mainPage);
+      } else {
+        Get.offAllNamed(AppRoutes.login);
+      }
+    });
   }
 
   @override

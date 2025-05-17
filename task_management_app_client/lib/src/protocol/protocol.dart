@@ -14,6 +14,7 @@ import 'greeting.dart' as _i2;
 import 'task.dart' as _i3;
 import 'task_status.dart' as _i4;
 import 'package:task_management_app_client/src/protocol/task.dart' as _i5;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i6;
 export 'greeting.dart';
 export 'task.dart';
 export 'task_status.dart';
@@ -53,6 +54,9 @@ class Protocol extends _i1.SerializationManager {
     if (t == List<_i5.Task>) {
       return (data as List).map((e) => deserialize<_i5.Task>(e)).toList() as T;
     }
+    try {
+      return _i6.Protocol().deserialize<T>(data, t);
+    } on _i1.DeserializationTypeNotFoundException catch (_) {}
     return super.deserialize<T>(data, t);
   }
 
@@ -68,6 +72,10 @@ class Protocol extends _i1.SerializationManager {
     }
     if (data is _i4.TaskStatus) {
       return 'TaskStatus';
+    }
+    className = _i6.Protocol().getClassNameForObject(data);
+    if (className != null) {
+      return 'serverpod_auth.$className';
     }
     return null;
   }
@@ -86,6 +94,10 @@ class Protocol extends _i1.SerializationManager {
     }
     if (dataClassName == 'TaskStatus') {
       return deserialize<_i4.TaskStatus>(data['data']);
+    }
+    if (dataClassName.startsWith('serverpod_auth.')) {
+      data['className'] = dataClassName.substring(15);
+      return _i6.Protocol().deserializeByClassName(data);
     }
     return super.deserializeByClassName(data);
   }

@@ -11,10 +11,11 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
-import 'greeting.dart' as _i3;
-import 'task.dart' as _i4;
-import 'task_status.dart' as _i5;
-import 'package:task_management_app_server/src/generated/task.dart' as _i6;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
+import 'greeting.dart' as _i4;
+import 'task.dart' as _i5;
+import 'task_status.dart' as _i6;
+import 'package:task_management_app_server/src/generated/task.dart' as _i7;
 export 'greeting.dart';
 export 'task.dart';
 export 'task_status.dart';
@@ -89,6 +90,7 @@ class Protocol extends _i1.SerializationManagerServer {
       ],
       managed: true,
     ),
+    ..._i3.Protocol.targetTableDefinitions,
     ..._i2.Protocol.targetTableDefinitions,
   ];
 
@@ -98,27 +100,30 @@ class Protocol extends _i1.SerializationManagerServer {
     Type? t,
   ]) {
     t ??= T;
-    if (t == _i3.Greeting) {
-      return _i3.Greeting.fromJson(data) as T;
+    if (t == _i4.Greeting) {
+      return _i4.Greeting.fromJson(data) as T;
     }
-    if (t == _i4.Task) {
-      return _i4.Task.fromJson(data) as T;
+    if (t == _i5.Task) {
+      return _i5.Task.fromJson(data) as T;
     }
-    if (t == _i5.TaskStatus) {
-      return _i5.TaskStatus.fromJson(data) as T;
+    if (t == _i6.TaskStatus) {
+      return _i6.TaskStatus.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i3.Greeting?>()) {
-      return (data != null ? _i3.Greeting.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i4.Greeting?>()) {
+      return (data != null ? _i4.Greeting.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i4.Task?>()) {
-      return (data != null ? _i4.Task.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i5.Task?>()) {
+      return (data != null ? _i5.Task.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i5.TaskStatus?>()) {
-      return (data != null ? _i5.TaskStatus.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i6.TaskStatus?>()) {
+      return (data != null ? _i6.TaskStatus.fromJson(data) : null) as T;
     }
-    if (t == List<_i6.Task>) {
-      return (data as List).map((e) => deserialize<_i6.Task>(e)).toList() as T;
+    if (t == List<_i7.Task>) {
+      return (data as List).map((e) => deserialize<_i7.Task>(e)).toList() as T;
     }
+    try {
+      return _i3.Protocol().deserialize<T>(data, t);
+    } on _i1.DeserializationTypeNotFoundException catch (_) {}
     try {
       return _i2.Protocol().deserialize<T>(data, t);
     } on _i1.DeserializationTypeNotFoundException catch (_) {}
@@ -129,18 +134,22 @@ class Protocol extends _i1.SerializationManagerServer {
   String? getClassNameForObject(Object? data) {
     String? className = super.getClassNameForObject(data);
     if (className != null) return className;
-    if (data is _i3.Greeting) {
+    if (data is _i4.Greeting) {
       return 'Greeting';
     }
-    if (data is _i4.Task) {
+    if (data is _i5.Task) {
       return 'Task';
     }
-    if (data is _i5.TaskStatus) {
+    if (data is _i6.TaskStatus) {
       return 'TaskStatus';
     }
     className = _i2.Protocol().getClassNameForObject(data);
     if (className != null) {
       return 'serverpod.$className';
+    }
+    className = _i3.Protocol().getClassNameForObject(data);
+    if (className != null) {
+      return 'serverpod_auth.$className';
     }
     return null;
   }
@@ -152,17 +161,21 @@ class Protocol extends _i1.SerializationManagerServer {
       return super.deserializeByClassName(data);
     }
     if (dataClassName == 'Greeting') {
-      return deserialize<_i3.Greeting>(data['data']);
+      return deserialize<_i4.Greeting>(data['data']);
     }
     if (dataClassName == 'Task') {
-      return deserialize<_i4.Task>(data['data']);
+      return deserialize<_i5.Task>(data['data']);
     }
     if (dataClassName == 'TaskStatus') {
-      return deserialize<_i5.TaskStatus>(data['data']);
+      return deserialize<_i6.TaskStatus>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
       return _i2.Protocol().deserializeByClassName(data);
+    }
+    if (dataClassName.startsWith('serverpod_auth.')) {
+      data['className'] = dataClassName.substring(15);
+      return _i3.Protocol().deserializeByClassName(data);
     }
     return super.deserializeByClassName(data);
   }
@@ -170,14 +183,20 @@ class Protocol extends _i1.SerializationManagerServer {
   @override
   _i1.Table? getTableForType(Type t) {
     {
+      var table = _i3.Protocol().getTableForType(t);
+      if (table != null) {
+        return table;
+      }
+    }
+    {
       var table = _i2.Protocol().getTableForType(t);
       if (table != null) {
         return table;
       }
     }
     switch (t) {
-      case _i4.Task:
-        return _i4.Task.t;
+      case _i5.Task:
+        return _i5.Task.t;
     }
     return null;
   }
