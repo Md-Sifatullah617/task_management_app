@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:lottie/lottie.dart';
 import 'package:task_management_app_client/task_management_app_client.dart';
 import 'package:task_management_app_flutter/controller/task_controller.dart';
 
 import '../style/style.dart';
 
-ListView taskList(
+taskList(
     BuildContext context, TaskController controller, List<Task> taskItems) {
   deleteItems(id) async {
     showDialog(
@@ -41,13 +43,15 @@ ListView taskList(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   ...List.generate(TaskStatus.values.length, (index) {
-                    return RadioListTile(
-                      title: Text(TaskStatus.values[index].name),
-                      value: TaskStatus.values[index],
-                      groupValue: controller.status.value,
-                      onChanged: (value) {
-                        controller.status.value = value!;
-                      },
+                    return Obx(
+                      () => RadioListTile(
+                        title: Text(TaskStatus.values[index].name),
+                        value: TaskStatus.values[index],
+                        groupValue: controller.status.value,
+                        onChanged: (value) {
+                          controller.status.value = value!;
+                        },
+                      ),
                     );
                   }),
                   const SizedBox(
@@ -55,7 +59,6 @@ ListView taskList(
                   ),
                   ElevatedButton(
                       onPressed: () async {
-                        Navigator.pop(context);
                         controller.updateStatusById(id);
                       },
                       style: appButtonStyle(),
@@ -67,6 +70,21 @@ ListView taskList(
         });
   }
 
+  if (taskItems.isEmpty) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          LottieBuilder.asset(
+            "assets/images/no data.json",
+            height: 200,
+            repeat: false,
+          ),
+          Text("No ${controller.status.value} Task Found"),
+        ],
+      ),
+    );
+  }
   return ListView.builder(
       itemCount: taskItems.length,
       itemBuilder: (context, index) {
@@ -79,11 +97,6 @@ ListView taskList(
           statusColor = colorRed;
         }
 
-        if (taskItems.isEmpty) {
-          return Center(
-            child: Text("No ${controller.status.value} Task Found"),
-          );
-        }
         return Card(
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           child: containerCard(Column(

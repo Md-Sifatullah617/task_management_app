@@ -10,28 +10,26 @@ import '../../Component/new_task_list.dart';
 import '../../Component/progress_task_list.dart';
 import '../../Component/task_app_bar.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class MyHomePage extends StatelessWidget {
+  MyHomePage({super.key});
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   final TaskController taskController = Get.find<TaskController>();
-  ValueNotifier<int> bottomNavIndex = ValueNotifier(0);
+
+  final ValueNotifier<int> bottomNavIndex = ValueNotifier(0);
+
   onTappedIndexChange(int index) {
     bottomNavIndex.value = index;
     taskController.status.value = TaskStatus.values[index];
   }
 
   final widgetOptions = [
-    const NewTaskList(),
-    const ProgressTaskList(),
-    const CompletedTaskList(),
-    const CancelTaskList()
+    NewTaskList(),
+    ProgressTaskList(),
+    CompletedTaskList(),
+    CancelTaskList()
   ];
-  Map<String, String> profileDetails = {
+
+  final Map<String, String> profileDetails = {
     "firstName": "",
     "lastName": "",
     "email": "",
@@ -39,26 +37,6 @@ class _MyHomePageState extends State<MyHomePage> {
   };
 
   // callStoredData() async {
-  //   String? email = await readUserData("email");
-  //   String? fName = await readUserData("firstName");
-  //   String? lName = await readUserData("lastName");
-  //   String? pp = await readUserData("photo");
-  //   setState(() {
-  //     profileDetails = {
-  //       "firstName": fName ?? "",
-  //       "lastName": lName ?? "",
-  //       "email": email ?? "",
-  //       "photo": pp ?? "",
-  //     };
-  //   });
-  // }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   callStoredData();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

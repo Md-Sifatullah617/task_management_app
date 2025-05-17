@@ -18,7 +18,7 @@ class AppRoutes {
     GetPage(name: splash, page: () => const SplashScreen()),
     GetPage(
         name: mainPage,
-        page: () => const MyHomePage(),
+        page: () => MyHomePage(),
         binding: BindingsBuilder(() {
           Get.lazyPut(() => TaskController());
         })),
@@ -28,7 +28,7 @@ class AppRoutes {
         name: emailVerification, page: () => const EmailVerificationScreen()),
     GetPage(name: pinVerification, page: () => const PinVerificationScreen()),
     GetPage(name: setPwd, page: () => const SetPwdScreen()),
-    GetPage(name: taskCreate, page: () => const TaskCreateScreen()),
+    GetPage(name: taskCreate, page: () => TaskCreateScreen()),
     GetPage(name: updateProfile, page: () => const ProfileUpdateScreen()),
   ];
 }
