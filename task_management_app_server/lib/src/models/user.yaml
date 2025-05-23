@@ -1,0 +1,9 @@
+class: User
+table: user
+fields:
+  email: String
+  firstName: String
+  lastName: String
+  phone: String?
+  avatar: String?
+  password: String

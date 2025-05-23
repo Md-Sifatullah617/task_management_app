@@ -102,6 +102,8 @@ void withServerpod(
 }
 
 class TestEndpoints {
+  late final _ProfileEndpoint profile;
+
   late final _TaskEndpoint task;
 
   late final _GreetingEndpoint greeting;
@@ -114,6 +116,10 @@ class _InternalTestEndpoints extends TestEndpoints
     _i2.SerializationManager serializationManager,
     _i2.EndpointDispatch endpoints,
   ) {
+    profile = _ProfileEndpoint(
+      endpoints,
+      serializationManager,
+    );
     task = _TaskEndpoint(
       endpoints,
       serializationManager,
@@ -123,6 +129,13 @@ class _InternalTestEndpoints extends TestEndpoints
       serializationManager,
     );
   }
+}
+
+class _ProfileEndpoint {
+  _ProfileEndpoint(
+    _endpointDispatch,
+    _serializationManager,
+  );
 }
 
 class _TaskEndpoint {

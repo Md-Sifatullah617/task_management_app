@@ -10,29 +10,41 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
-import '../endpoints/task_endpoint.dart' as _i2;
-import '../greeting_endpoint.dart' as _i3;
+import '../endpoints/profile_endpoint.dart' as _i2;
+import '../endpoints/task_endpoint.dart' as _i3;
+import '../greeting_endpoint.dart' as _i4;
 import 'package:task_management_app_server/src/generated/task_status.dart'
-    as _i4;
-import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i5;
+    as _i5;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i6;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
   void initializeEndpoints(_i1.Server server) {
     var endpoints = <String, _i1.Endpoint>{
-      'task': _i2.TaskEndpoint()
+      'profile': _i2.ProfileEndpoint()
+        ..initialize(
+          server,
+          'profile',
+          null,
+        ),
+      'task': _i3.TaskEndpoint()
         ..initialize(
           server,
           'task',
           null,
         ),
-      'greeting': _i3.GreetingEndpoint()
+      'greeting': _i4.GreetingEndpoint()
         ..initialize(
           server,
           'greeting',
           null,
         ),
     };
+    connectors['profile'] = _i1.EndpointConnector(
+      name: 'profile',
+      endpoint: endpoints['profile']!,
+      methodConnectors: {},
+    );
     connectors['task'] = _i1.EndpointConnector(
       name: 'task',
       endpoint: endpoints['task']!,
@@ -55,7 +67,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['task'] as _i2.TaskEndpoint).creatTask(
+              (endpoints['task'] as _i3.TaskEndpoint).creatTask(
             session,
             params['title'],
             params['description'],
@@ -74,7 +86,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['task'] as _i2.TaskEndpoint).deleteTask(
+              (endpoints['task'] as _i3.TaskEndpoint).deleteTask(
             session,
             params['id'],
           ),
@@ -86,7 +98,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['task'] as _i2.TaskEndpoint).getAllTask(session),
+              (endpoints['task'] as _i3.TaskEndpoint).getAllTask(session),
         ),
         'updateTaskStatus': _i1.MethodConnector(
           name: 'updateTaskStatus',
@@ -98,7 +110,7 @@ class Endpoints extends _i1.EndpointDispatch {
             ),
             'status': _i1.ParameterDescription(
               name: 'status',
-              type: _i1.getType<_i4.TaskStatus>(),
+              type: _i1.getType<_i5.TaskStatus>(),
               nullable: false,
             ),
           },
@@ -106,7 +118,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['task'] as _i2.TaskEndpoint).updateTaskStatus(
+              (endpoints['task'] as _i3.TaskEndpoint).updateTaskStatus(
             session,
             params['id'],
             params['status'],
@@ -135,7 +147,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['task'] as _i2.TaskEndpoint).updateTask(
+              (endpoints['task'] as _i3.TaskEndpoint).updateTask(
             session,
             params['id'],
             params['title'],
@@ -161,13 +173,13 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['greeting'] as _i3.GreetingEndpoint).hello(
+              (endpoints['greeting'] as _i4.GreetingEndpoint).hello(
             session,
             params['name'],
           ),
         )
       },
     );
-    modules['serverpod_auth'] = _i5.Endpoints()..initializeEndpoints(server);
+    modules['serverpod_auth'] = _i6.Endpoints()..initializeEndpoints(server);
   }
 }

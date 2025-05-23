@@ -29,7 +29,16 @@ void run(List<String> args) async {
   );
 
   auth.AuthConfig.set(auth.AuthConfig(
-    minPasswordLength: 8,
+    sendValidationEmail: (session, email, validationCode) async {
+      print('Validation code: $validationCode');
+      session.log('Code for $email is $validationCode');
+      return true;
+    },
+    sendPasswordResetEmail: (session, userInfo, validationCode) async {
+      print('Validation code: $validationCode');
+      session.log('Code for ${userInfo.userName} is $validationCode');
+      return true;
+    },
   ));  
 
   // Start the server.

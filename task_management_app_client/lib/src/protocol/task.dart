@@ -15,6 +15,7 @@ import 'task_status.dart' as _i2;
 abstract class Task implements _i1.SerializableModel {
   Task._({
     this.id,
+    required this.userId,
     required this.title,
     required this.description,
     required this.status,
@@ -24,6 +25,7 @@ abstract class Task implements _i1.SerializableModel {
 
   factory Task({
     int? id,
+    required int userId,
     required String title,
     required String description,
     required _i2.TaskStatus status,
@@ -34,6 +36,7 @@ abstract class Task implements _i1.SerializableModel {
   factory Task.fromJson(Map<String, dynamic> jsonSerialization) {
     return Task(
       id: jsonSerialization['id'] as int?,
+      userId: jsonSerialization['userId'] as int,
       title: jsonSerialization['title'] as String,
       description: jsonSerialization['description'] as String,
       status: _i2.TaskStatus.fromJson((jsonSerialization['status'] as int)),
@@ -48,6 +51,8 @@ abstract class Task implements _i1.SerializableModel {
   /// database or if it has been fetched from the database. Otherwise,
   /// the id will be null.
   int? id;
+
+  int userId;
 
   String title;
 
@@ -64,6 +69,7 @@ abstract class Task implements _i1.SerializableModel {
   @_i1.useResult
   Task copyWith({
     int? id,
+    int? userId,
     String? title,
     String? description,
     _i2.TaskStatus? status,
@@ -74,6 +80,7 @@ abstract class Task implements _i1.SerializableModel {
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
+      'userId': userId,
       'title': title,
       'description': description,
       'status': status.toJson(),
@@ -93,6 +100,7 @@ class _Undefined {}
 class _TaskImpl extends Task {
   _TaskImpl({
     int? id,
+    required int userId,
     required String title,
     required String description,
     required _i2.TaskStatus status,
@@ -100,6 +108,7 @@ class _TaskImpl extends Task {
     required DateTime updatedAt,
   }) : super._(
           id: id,
+          userId: userId,
           title: title,
           description: description,
           status: status,
@@ -113,6 +122,7 @@ class _TaskImpl extends Task {
   @override
   Task copyWith({
     Object? id = _Undefined,
+    int? userId,
     String? title,
     String? description,
     _i2.TaskStatus? status,
@@ -121,6 +131,7 @@ class _TaskImpl extends Task {
   }) {
     return Task(
       id: id is int? ? id : this.id,
+      userId: userId ?? this.userId,
       title: title ?? this.title,
       description: description ?? this.description,
       status: status ?? this.status,

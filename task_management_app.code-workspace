@@ -1,0 +1,11 @@
+{
+  "folders": [
+	{
+		"name": "task_management_app",
+		"path": "."
+	}
+],
+  "settings": {
+    "java.configuration.updateBuildConfiguration": "automatic"
+  }
+}

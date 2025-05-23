@@ -15,10 +15,12 @@ import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
 import 'greeting.dart' as _i4;
 import 'task.dart' as _i5;
 import 'task_status.dart' as _i6;
-import 'package:task_management_app_server/src/generated/task.dart' as _i7;
+import 'user.dart' as _i7;
+import 'package:task_management_app_server/src/generated/task.dart' as _i8;
 export 'greeting.dart';
 export 'task.dart';
 export 'task_status.dart';
+export 'user.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
   Protocol._();
@@ -40,6 +42,12 @@ class Protocol extends _i1.SerializationManagerServer {
           isNullable: false,
           dartType: 'int?',
           columnDefault: 'nextval(\'task_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'userId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'title',
@@ -72,10 +80,89 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'DateTime',
         ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'task_fk_0',
+          columns: ['userId'],
+          referenceTable: 'user',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.cascade,
+          matchType: null,
+        )
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'task_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'user',
+      dartName: 'User',
+      schema: 'public',
+      module: 'task_management_app',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'user_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'email',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'firstName',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'lastName',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'phone',
+          columnType: _i2.ColumnType.text,
+          isNullable: true,
+          dartType: 'String?',
+        ),
+        _i2.ColumnDefinition(
+          name: 'avatar',
+          columnType: _i2.ColumnType.text,
+          isNullable: true,
+          dartType: 'String?',
+        ),
+        _i2.ColumnDefinition(
+          name: 'password',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'user_pkey',
           tableSpace: null,
           elements: [
             _i2.IndexElementDefinition(
@@ -109,6 +196,9 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i6.TaskStatus) {
       return _i6.TaskStatus.fromJson(data) as T;
     }
+    if (t == _i7.User) {
+      return _i7.User.fromJson(data) as T;
+    }
     if (t == _i1.getType<_i4.Greeting?>()) {
       return (data != null ? _i4.Greeting.fromJson(data) : null) as T;
     }
@@ -118,8 +208,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i6.TaskStatus?>()) {
       return (data != null ? _i6.TaskStatus.fromJson(data) : null) as T;
     }
-    if (t == List<_i7.Task>) {
-      return (data as List).map((e) => deserialize<_i7.Task>(e)).toList() as T;
+    if (t == _i1.getType<_i7.User?>()) {
+      return (data != null ? _i7.User.fromJson(data) : null) as T;
+    }
+    if (t == List<_i8.Task>) {
+      return (data as List).map((e) => deserialize<_i8.Task>(e)).toList() as T;
     }
     try {
       return _i3.Protocol().deserialize<T>(data, t);
@@ -142,6 +235,9 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (data is _i6.TaskStatus) {
       return 'TaskStatus';
+    }
+    if (data is _i7.User) {
+      return 'User';
     }
     className = _i2.Protocol().getClassNameForObject(data);
     if (className != null) {
@@ -168,6 +264,9 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (dataClassName == 'TaskStatus') {
       return deserialize<_i6.TaskStatus>(data['data']);
+    }
+    if (dataClassName == 'User') {
+      return deserialize<_i7.User>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
@@ -197,6 +296,8 @@ class Protocol extends _i1.SerializationManagerServer {
     switch (t) {
       case _i5.Task:
         return _i5.Task.t;
+      case _i7.User:
+        return _i7.User.t;
     }
     return null;
   }

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:task_management_app_flutter/controller/auth_controller.dart';
 
 import 'controller/task_controller.dart';
 import 'pages.dart';
@@ -22,8 +23,18 @@ class AppRoutes {
         binding: BindingsBuilder(() {
           Get.lazyPut(() => TaskController());
         })),
-    GetPage(name: login, page: () => const LoginScreen()),
-    GetPage(name: registration, page: () => const RegistrationScreen()),
+    GetPage(
+        name: login,
+        page: () => const LoginScreen(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => AuthController());
+        })),
+    GetPage(
+        name: registration,
+        page: () => const RegistrationScreen(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => AuthController());
+        })),
     GetPage(
         name: emailVerification, page: () => const EmailVerificationScreen()),
     GetPage(name: pinVerification, page: () => const PinVerificationScreen()),

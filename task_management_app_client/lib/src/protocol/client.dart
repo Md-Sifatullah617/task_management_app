@@ -19,6 +19,14 @@ import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i6;
 import 'protocol.dart' as _i7;
 
 /// {@category Endpoint}
+class EndpointProfile extends _i1.EndpointRef {
+  EndpointProfile(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'profile';
+}
+
+/// {@category Endpoint}
 class EndpointTask extends _i1.EndpointRef {
   EndpointTask(_i1.EndpointCaller caller) : super(caller);
 
@@ -131,10 +139,13 @@ class Client extends _i1.ServerpodClientShared {
           disconnectStreamsOnLostInternetConnection:
               disconnectStreamsOnLostInternetConnection,
         ) {
+    profile = EndpointProfile(this);
     task = EndpointTask(this);
     greeting = EndpointGreeting(this);
     modules = Modules(this);
   }
+
+  late final EndpointProfile profile;
 
   late final EndpointTask task;
 
@@ -144,6 +155,7 @@ class Client extends _i1.ServerpodClientShared {
 
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
+        'profile': profile,
         'task': task,
         'greeting': greeting,
       };

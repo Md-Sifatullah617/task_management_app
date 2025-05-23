@@ -1,6 +1,11 @@
 class: Task
 table: task
 fields:
+  userId:
+    type: int
+    relation:
+      parent: user
+      onDelete: cascade
   title: String
   description: String
   status: TaskStatus
